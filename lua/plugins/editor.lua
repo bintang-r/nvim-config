@@ -15,9 +15,9 @@ return {
     },
     cmd = "Neotree",
     keys = {
-      { "<C-b>", "<cmd>Neotree toggle filesystem left<CR>", desc = " Buka/Tutup Sidebar Explorer (Ctrl+B)" },
-      { "<A-e>", "<cmd>Neotree focus filesystem left<CR>", desc = " Fokus ke Sidebar File Explorer (Alt+E)" },
-      { "<A-s>", "<cmd>Neotree show git_status left<CR>", desc = " Buka Tab Git di Sidebar Kiri (Alt+S)" },
+      { "<C-b>", "<cmd>Neotree toggle filesystem left<CR>", mode = { "n", "i", "v" }, desc = " Buka/Tutup Sidebar Explorer (Ctrl+B)" },
+      { "<A-e>", "<cmd>Neotree focus filesystem left<CR>", mode = { "n", "i", "v" }, desc = " Fokus ke Sidebar File Explorer (Alt+E)" },
+      { "<A-s>", "<cmd>Neotree show git_status left<CR>", mode = { "n", "i", "v" }, desc = " Buka Tab Git di Sidebar Kiri (Alt+S)" },
     },
     config = function()
       require("neo-tree").setup({

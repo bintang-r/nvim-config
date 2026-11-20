@@ -93,5 +93,6 @@ if vim.fn.has("win32") == 1 then
   opt.shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait"
   opt.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
   opt.shellquote = ""
+  -- Wajib kosong untuk PowerShell: jika diisi '"', PowerShell menganggap perintah sebagai string literal lalu langsung exit 0.
   opt.shellxquote = ""
 end

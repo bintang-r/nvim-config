@@ -18,7 +18,7 @@ return {
       local ok_configs, ts_configs = pcall(require, "nvim-treesitter.configs")
       if ok_configs then
         ts_configs.setup({
-          -- Parser dasar yang sudah tersedia atau ringan dikompilasi
+          -- Parser dasar + bahasa yang dipakai di VS Code (auto rename tag butuh parser ini)
           ensure_installed = {
             "lua",
             "vim",
@@ -26,6 +26,33 @@ return {
             "query",
             "markdown",
             "markdown_inline",
+            "html",
+            "css",
+            "javascript",
+            "typescript",
+            "tsx",
+            "jsdoc",
+            "json",
+            "jsonc",
+            "php",
+            "php_only",
+            "blade",
+            "vue",
+            "svelte",
+            "python",
+            "go",
+            "c",
+            "cpp",
+            "java",
+            "kotlin",
+            "c_sharp",
+            "dart",
+            "prisma",
+            "bash",
+            "yaml",
+            "dockerfile",
+            "graphql",
+            "gdscript",
           },
           auto_install = false,
           highlight = {

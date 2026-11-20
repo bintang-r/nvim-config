@@ -130,6 +130,57 @@ local function focus_main_editor_win()
   return vim.api.nvim_get_current_win()
 end
 
+-- Dipakai oleh project picker & terminal manager supaya fokus tidak nyangkut
+-- di panel terminal / sidebar saat sedang mengetik.
+M.focus_editor = focus_main_editor_win
+
+local function ensure_normal_mode()
+  local m = vim.fn.mode()
+  if m == "i" or m == "t" or m:match("^R") then
+    vim.cmd("stopinsert")
+  end
+end
+M.ensure_normal_mode = ensure_normal_mode
+
+-- Klik file di Neo-tree saat sedang insert-mode harus langsung aktif (mapping
+-- sidebar hanya berjalan di normal mode). Paksa keluar dari insert saat masuk.
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = vim.api.nvim_create_augroup("VSCodeSidebarNormalMode", { clear = true }),
+  callback = function()
+    if vim.bo.filetype == "neo-tree" or vim.bo.filetype == "alpha" then
+      ensure_normal_mode()
+    end
+  end,
+})
+
+-- Jangan pernah membawa mode terminal/insert pulang saat meninggalkan terminal.
+vim.api.nvim_create_autocmd("TermLeave", {
+  group = vim.api.nvim_create_augroup("VSCodeTerminalModeReset", { clear = true }),
+  callback = function()
+    ensure_normal_mode()
+  end,
+})
+
+-- Saat klik / pindah fokus kembali ke jendela terminal, langsung masuk mode ketik
+-- (tanpa harus tekan 'i' dulu). Tekan <Esc><Esc> atau jk di dalam terminal jika
+-- ingin keluar ke Normal mode untuk scroll/copy.
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+  group = vim.api.nvim_create_augroup("VSCodeTerminalAutoInsert", { clear = true }),
+  callback = function()
+    if vim.bo.buftype ~= "terminal" then
+      return
+    end
+    vim.schedule(function()
+      if vim.bo.buftype == "terminal" then
+        local chan = vim.bo.channel
+        if chan and chan > 0 and vim.fn.jobwait({ chan }, 0)[1] == -1 then
+          vim.cmd("startinsert")
+        end
+      end
+    end)
+  end,
+})
+
 -- Deteksi folder aktif (mendukung posisi kursor di Sidebar Neo-tree maupun di Editor)
 local function get_base_dir()
   local ft = vim.bo.filetype
@@ -356,10 +407,10 @@ local function create_terminal_buf()
   return buf, term_id
 end
 
--- Pastikan buffer terminal sudah menjalankan shell PowerShell
+-- Pastikan buffer terminal sudah menjalankan shell PowerShell interaktif
 local function ensure_term_running(buf)
   if vim.bo[buf].buftype ~= "terminal" then
-    vim.fn.termopen(vim.o.shell)
+    vim.fn.termopen({ vim.o.shell, "-NoLogo" })
     vim.bo[buf].buflisted = false
   end
 end
@@ -455,6 +506,9 @@ function M.toggle_bottom_terminal()
         pcall(vim.api.nvim_win_close, w, false)
       end
     end
+    -- Pastikan fokus dan mode kembali ke editor, bukan ke jendela terminal yang hilang.
+    ensure_normal_mode()
+    M.focus_editor()
     refresh_all_winbars()
   else
     M.show_terminal_at(M.active_term_idx)
@@ -592,6 +646,8 @@ function M.close_terminal()
       pcall(vim.api.nvim_win_close, w, false)
     end
   end
+  ensure_normal_mode()
+  M.focus_editor()
   refresh_all_winbars()
 end
 
@@ -1031,13 +1087,15 @@ vim.keymap.set("n", "<A-Del>", M.delete_current_file, { desc = "🗑️ Hapus Fi
 -- D. Find & Replace di File Aktif (Ctrl+R)
 vim.keymap.set("n", "<C-r>", M.find_and_replace, { desc = "🔎 Find & Replace Teks di File Ini (Ctrl+R)" })
 
--- E. Tutup Tab Aktif Tanpa Menutup Sidebar (Alt+W atau F4)
-vim.keymap.set("n", "<A-w>", function()
+-- E. Tutup Tab Aktif Tanpa Menutup Sidebar (Alt+X, Alt+W, atau F4)
+--    Di buffer code: Alt+X menutup tab code aktif. Di buffer terminal: dioverride lokal oleh TermOpen untuk menutup terminal aktif.
+local function close_active_code_tab()
+  ensure_normal_mode()
   M.smart_close_buffer()
-end, { desc = "❌ Tutup Tab Aktif (Alt+W)" })
-vim.keymap.set("n", "<F4>", function()
-  M.smart_close_buffer()
-end, { desc = "❌ Tutup Tab Aktif (F4)" })
+end
+vim.keymap.set({ "n", "i" }, "<A-x>", close_active_code_tab, { desc = "❌ Tutup Tab Code Aktif (Alt+X)" })
+vim.keymap.set({ "n", "i" }, "<A-w>", close_active_code_tab, { desc = "❌ Tutup Tab Aktif (Alt+W)" })
+vim.keymap.set({ "n", "i" }, "<F4>", close_active_code_tab, { desc = "❌ Tutup Tab Aktif (F4)" })
 
 -- F. Buka / Tutup Terminal & Multi-Terminal Shortcuts
 vim.keymap.set({ "n", "i", "t" }, "<C-t>", M.toggle_bottom_terminal, { desc = " Buka/Tutup Panel Terminal Bawah (Ctrl+T)" })
