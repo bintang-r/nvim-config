@@ -107,6 +107,17 @@ C:\_neovim\nvim.cmd .
 | **`Alt + P`** | **Pin / Unpin Tab Aktif** |
 | **`Alt + X`** / **`Alt + W`** / **`F4`** | **Tutup Tab Code Aktif** tanpa menutup Sidebar *(di dalam terminal, `Alt + X` menutup terminal aktif)* |
 
+### 1c. 📦 Kelola File & Folder di Sidebar Explorer (*Drag, Copy, Cut & Paste*)
+| Aksi / Shortcut *(di Sidebar)* | Fungsi |
+| :--- | :--- |
+| **🖱️ Drag & Drop Mouse** | **Tarik & Lepas File/Folder** ke folder tujuan untuk memindahkan file langsung *(tersedia notifikasi live saat menyeret)* |
+| **`Ctrl + C`** / **`y`** | **Copy File/Folder** ke clipboard Explorer *(siap diduplikat)* |
+| **`Ctrl + X`** / **`x`** | **Cut File/Folder** ke clipboard Explorer *(siap dipindahkan)* |
+| **`Ctrl + V`** / **`p`** | **Paste ke Folder Tujuan** — otomatis **duplikat** jika dari Copy, atau **pindah** jika dari Cut |
+| **`c`** / **`m`** | **Copy / Move Cepat** dengan input path tujuan |
+| **`Y`** | **Salin Path Lengkap** file/folder ke Clipboard Windows |
+| **`Esc`** | **Batalkan** antrean Copy / Cut di Sidebar |
+
 ### 2.  Multi-Terminal PowerShell
 | Shortcut / Tombol | Fungsi |
 | :--- | :--- |
@@ -117,9 +128,16 @@ C:\_neovim\nvim.cmd .
 | **`Alt + X`** | **Hapus / Matikan Terminal Aktif** |
 | **`Alt + T`** | **Buka / Tutup Floating Terminal** |
 
-### 3. ✏️ Editing & Undo/Redo (Standar VS Code)
+### 3. ✏️ Editing, Select Code & Undo/Redo (Standar VS Code)
 | Shortcut | Fungsi |
 | :--- | :--- |
+| **`Shift + Panah`** (`←` `→` `↑` `↓`) | **Select Karakter / Baris** ke kiri, kanan, atas, bawah *(aktif di Normal, Insert & Visual mode)* |
+| **`Ctrl + Shift + Left/Right`** | **Select Per Kata** ke kiri / kanan |
+| **`Shift + Home`** / **`Shift + End`** | **Select sampai Awal / Akhir Baris** |
+| **`Ctrl + L`** | **Select 1 Baris Penuh** *(tekan lagi untuk memperluas ke baris bawah)* |
+| **`Alt + D`** | **Select 1 Kata Aktif** di bawah kursor |
+| **`Alt + A`** / **`Alt + Z`** | **Smart Expand / Shrink Selection** *(Treesitter: kata → ekspresi → blok → fungsi)* |
+| **`Ctrl + A`** | **Select All / Blok Semua** |
 | **`Ctrl + Z`** / **`Ctrl + Y`** | **Undo** / **Redo** |
 | **`Ctrl + D`** / **`Shift + Alt + Down/Up`** | **Duplikat Baris / Teks** ke bawah atau ke atas |
 | **`Alt + Down/Up`** | **Geser Baris (Move Line)** ke bawah / ke atas |
@@ -236,6 +254,17 @@ C:\_neovim\nvim.cmd .
 | **`Alt + P`** | **Pin / Unpin Active Tab** |
 | **`Alt + X`** / **`Alt + W`** / **`F4`** | **Close Active Code Tab** without closing Sidebar *(inside terminal, `Alt + X` kills active terminal)* |
 
+### 1c. 📦 Sidebar File Operations (*Drag, Copy, Cut & Paste*)
+| Action / Shortcut *(in Sidebar)* | Description |
+| :--- | :--- |
+| **🖱️ Mouse Drag & Drop** | **Drag & Drop File/Folder** onto a target folder to move it directly *(with live drag preview)* |
+| **`Ctrl + C`** / **`y`** | **Copy File/Folder** to Explorer clipboard *(ready to duplicate)* |
+| **`Ctrl + X`** / **`x`** | **Cut File/Folder** to Explorer clipboard *(ready to move)* |
+| **`Ctrl + V`** / **`p`** | **Paste into Target Folder** — automatically **duplicates** on Copy or **moves** on Cut |
+| **`c`** / **`m`** | **Quick Copy / Move** with destination path prompt |
+| **`Y`** | **Copy Full Path** of file/folder to Windows Clipboard |
+| **`Esc`** | **Clear** Explorer Copy / Cut clipboard |
+
 ### 2.  Multi-Terminal PowerShell
 | Shortcut / Button | Description |
 | :--- | :--- |
@@ -246,9 +275,16 @@ C:\_neovim\nvim.cmd .
 | **`Alt + X`** | **Kill / Close Active Terminal** |
 | **`Alt + T`** | **Toggle Floating Terminal** |
 
-### 3. ✏️ Editing & Undo/Redo (VS Code Standard)
+### 3. ✏️ Editing, Code Selection & Undo/Redo (VS Code Standard)
 | Shortcut | Description |
 | :--- | :--- |
+| **`Shift + Arrow Keys`** (`←` `→` `↑` `↓`) | **Select Character / Line** left, right, up, down *(works in Normal, Insert & Visual mode)* |
+| **`Ctrl + Shift + Left/Right`** | **Select Word** left / right |
+| **`Shift + Home`** / **`Shift + End`** | **Select to Start / End of Line** |
+| **`Ctrl + L`** | **Select Full Line** *(press again to expand selection line by line)* |
+| **`Alt + D`** | **Select Active Word** under cursor |
+| **`Alt + A`** / **`Alt + Z`** | **Smart Expand / Shrink Selection** *(Treesitter: word → expression → block → function)* |
+| **`Ctrl + A`** | **Select All** |
 | **`Ctrl + Z`** / **`Ctrl + Y`** | **Undo** / **Redo** |
 | **`Ctrl + D`** / **`Shift + Alt + Down/Up`** | **Duplicate Line / Selection** down or up |
 | **`Alt + Down/Up`** | **Move Line** down or up |

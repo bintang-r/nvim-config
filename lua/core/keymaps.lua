@@ -87,6 +87,74 @@ keymap("i", "<C-a>", "<Esc>ggVG", { desc = "🔲 Select All / Blok Semua (Ctrl+A
 keymap("v", "<C-a>", "<Esc>ggVG", { desc = "🔲 Select All / Blok Semua (Ctrl+A)" })
 
 -- ============================================================================
+-- 1b. SELECT BAGIAN CODE TERTENTU ALA VS CODE (Shift+Panah, Ctrl+L, Alt+D, Alt+A/Z)
+-- ============================================================================
+local function insert_select_right(motion)
+  return function()
+    if vim.fn.col(".") == 1 then
+      return "<Esc>v" .. (motion or "")
+    end
+    return "<Esc>lv" .. (motion or "")
+  end
+end
+
+local function insert_select_left(motion)
+  return function()
+    if vim.fn.col(".") == 1 then
+      return "<Esc>v" .. (motion or "<Left>")
+    end
+    return "<Esc>v" .. (motion or "")
+  end
+end
+
+-- Select karakter per karakter & baris per baris (Shift + Panah)
+keymap("n", "<S-Left>", "v<Left>", { desc = "🔲 Select ke Kiri (Shift+Left)" })
+keymap("n", "<S-Right>", "v<Right>", { desc = "🔲 Select ke Kanan (Shift+Right)" })
+keymap("n", "<S-Up>", "v<Up>", { desc = "🔲 Select ke Atas (Shift+Up)" })
+keymap("n", "<S-Down>", "v<Down>", { desc = "🔲 Select ke Bawah (Shift+Down)" })
+
+keymap("i", "<S-Left>", insert_select_left(""), { expr = true, replace_keycodes = true, desc = "🔲 Select ke Kiri (Shift+Left)" })
+keymap("i", "<S-Right>", insert_select_right(""), { expr = true, replace_keycodes = true, desc = "🔲 Select ke Kanan (Shift+Right)" })
+keymap("i", "<S-Up>", "<Esc>v<Up>", { desc = "🔲 Select ke Atas (Shift+Up)" })
+keymap("i", "<S-Down>", "<Esc>v<Down>", { desc = "🔲 Select ke Bawah (Shift+Down)" })
+
+keymap("v", "<S-Left>", "<Left>", { desc = "🔲 Perluas Select ke Kiri (Shift+Left)" })
+keymap("v", "<S-Right>", "<Right>", { desc = "🔲 Perluas Select ke Kanan (Shift+Right)" })
+keymap("v", "<S-Up>", "<Up>", { desc = "🔲 Perluas Select ke Atas (Shift+Up)" })
+keymap("v", "<S-Down>", "<Down>", { desc = "🔲 Perluas Select ke Bawah (Shift+Down)" })
+
+-- Select per kata (Ctrl + Shift + Left / Right)
+keymap("n", "<C-S-Left>", "vb", { desc = "🔲 Select 1 Kata ke Kiri (Ctrl+Shift+Left)" })
+keymap("n", "<C-S-Right>", "ve", { desc = "🔲 Select 1 Kata ke Kanan (Ctrl+Shift+Right)" })
+keymap("i", "<C-S-Left>", "<Esc>vb", { desc = "🔲 Select 1 Kata ke Kiri (Ctrl+Shift+Left)" })
+keymap("i", "<C-S-Right>", insert_select_right("e"), { expr = true, replace_keycodes = true, desc = "🔲 Select 1 Kata ke Kanan (Ctrl+Shift+Right)" })
+keymap("v", "<C-S-Left>", "b", { desc = "🔲 Perluas Select 1 Kata ke Kiri (Ctrl+Shift+Left)" })
+keymap("v", "<C-S-Right>", "e", { desc = "🔲 Perluas Select 1 Kata ke Kanan (Ctrl+Shift+Right)" })
+
+-- Select sampai awal / akhir baris (Shift + Home / Shift + End)
+keymap("n", "<S-Home>", "v^", { desc = "🔲 Select ke Awal Baris (Shift+Home)" })
+keymap("n", "<S-End>", "v$", { desc = "🔲 Select ke Akhir Baris (Shift+End)" })
+keymap("i", "<S-Home>", "<Esc>v^", { desc = "🔲 Select ke Awal Baris (Shift+Home)" })
+keymap("i", "<S-End>", insert_select_right("$"), { expr = true, replace_keycodes = true, desc = "🔲 Select ke Akhir Baris (Shift+End)" })
+keymap("v", "<S-Home>", "^", { desc = "🔲 Perluas Select ke Awal Baris (Shift+Home)" })
+keymap("v", "<S-End>", "$", { desc = "🔲 Perluas Select ke Akhir Baris (Shift+End)" })
+
+-- Select 1 Baris Penuh & perluas ke baris bawah (Ctrl + L, persis VS Code)
+keymap("n", "<C-l>", "V", { desc = "🔲 Select 1 Baris Penuh (Ctrl+L)" })
+keymap("i", "<C-l>", "<Esc>V", { desc = "🔲 Select 1 Baris Penuh (Ctrl+L)" })
+keymap("v", "<C-l>", function()
+  return vim.fn.mode() == "V" and "j" or "V"
+end, { expr = true, desc = "🔲 Perluas Select ke Baris Bawah (Ctrl+L)" })
+
+-- Select 1 Kata Aktif di bawah kursor (Alt + D)
+keymap("n", "<A-d>", "viw", { desc = "🔲 Select 1 Kata Aktif (Alt+D)" })
+keymap("i", "<A-d>", "<Esc>viw", { desc = "🔲 Select 1 Kata Aktif (Alt+D)" })
+
+-- Hapus blok terpilih dengan Backspace / Delete tanpa menimpa clipboard
+keymap("v", "<BS>", '"_d', { desc = "⌫ Hapus Blok Terpilih (Backspace)" })
+keymap("v", "<Del>", '"_d', { desc = "🗑️ Hapus Blok Terpilih (Delete)" })
+
+-- ============================================================================
 -- 2. COPY, CUT, PASTE ALA VS CODE (Ctrl+C, Ctrl+X, Ctrl+V)
 -- ============================================================================
 -- Copy (Ctrl + C): Jika diblok menyalin blok, jika tidak diblok menyalin 1 baris aktif

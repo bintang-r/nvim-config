@@ -62,6 +62,16 @@ return {
           indent = {
             enable = true,
           },
+          -- Smart Expand / Shrink Selection ala VS Code (Alt+A untuk perluas blok kode, Alt+Z untuk perkecil)
+          incremental_selection = {
+            enable = true,
+            keymaps = {
+              init_selection = "<A-a>",
+              node_incremental = "<A-a>",
+              scope_incremental = "<A-S-a>",
+              node_decremental = "<A-z>",
+            },
+          },
         })
       end
     end,

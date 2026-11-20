@@ -20,6 +20,141 @@ return {
       { "<A-s>", "<cmd>Neotree show git_status left<CR>", mode = { "n", "i", "v" }, desc = " Buka Tab Git di Sidebar Kiri (Alt+S)" },
     },
     config = function()
+      -- State & helper untuk Mouse Drag-and-Drop file/folder di Sidebar Explorer (Neo-tree)
+      local drag_state = {
+        active = false,
+        dragged = false,
+        winid = nil,
+        start_line = nil,
+        source_path = nil,
+        source_name = nil,
+      }
+
+      local function normalize_path(p)
+        if not p then
+          return ""
+        end
+        local norm = p:gsub("\\", "/"):gsub("/+$", "")
+        if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+          norm = norm:lower()
+        end
+        return norm
+      end
+
+      local function feed_mouse(key)
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, false, true), "n", false)
+      end
+
+      local function handle_drag_mouse_down(state)
+        local pos = vim.fn.getmousepos()
+        local cur_win = vim.api.nvim_get_current_win()
+        if pos.winid ~= cur_win or pos.line <= 0 then
+          drag_state.active = false
+          drag_state.dragged = false
+          feed_mouse("<LeftMouse>")
+          return
+        end
+
+        pcall(vim.api.nvim_win_set_cursor, cur_win, { pos.line, math.max(0, pos.column - 1) })
+        local node = state.tree:get_node(pos.line)
+        if
+          node
+          and (node.type == "file" or node.type == "directory")
+          and normalize_path(node:get_id()) ~= normalize_path(state.path)
+        then
+          drag_state.active = true
+          drag_state.dragged = false
+          drag_state.winid = cur_win
+          drag_state.start_line = pos.line
+          drag_state.source_path = node:get_id()
+          drag_state.source_name = node.name
+        else
+          drag_state.active = false
+          drag_state.dragged = false
+        end
+      end
+
+      local function handle_drag_mouse_move(state)
+        if not drag_state.active then
+          feed_mouse("<LeftDrag>")
+          return
+        end
+
+        local pos = vim.fn.getmousepos()
+        if pos.winid == drag_state.winid and pos.line > 0 then
+          pcall(vim.api.nvim_win_set_cursor, pos.winid, { pos.line, 0 })
+          if pos.line ~= drag_state.start_line then
+            drag_state.dragged = true
+            local target = state.tree:get_node(pos.line)
+            if target and (target.type == "file" or target.type == "directory") then
+              local target_dir = target.type == "directory" and target:get_id() or vim.fn.fnamemodify(target:get_id(), ":h")
+              local folder_label = vim.fn.fnamemodify(target_dir, ":t")
+              vim.api.nvim_echo({
+                {
+                  string.format("📦 Drag '%s' → '%s/' (lepas mouse untuk pindahkan)", drag_state.source_name, folder_label),
+                  "WarningMsg",
+                },
+              }, false, {})
+            end
+          end
+        end
+      end
+
+      local function handle_drag_mouse_release(state)
+        local was_dragging = drag_state.active and drag_state.dragged
+        local src_path = drag_state.source_path
+        local src_name = drag_state.source_name
+        local winid = drag_state.winid
+
+        drag_state.active = false
+        drag_state.dragged = false
+
+        if not was_dragging then
+          return
+        end
+
+        vim.api.nvim_echo({ { "" } }, false, {})
+
+        local pos = vim.fn.getmousepos()
+        if pos.winid ~= winid or pos.line <= 0 then
+          vim.notify("ℹ️ Drag dibatalkan (lepas di luar Sidebar Explorer).", vim.log.levels.INFO)
+          return
+        end
+
+        local target = state.tree:get_node(pos.line)
+        if not target or (target.type ~= "file" and target.type ~= "directory") then
+          return
+        end
+
+        local target_dir = target.type == "directory" and target:get_id() or vim.fn.fnamemodify(target:get_id(), ":h")
+        local src_norm = normalize_path(src_path)
+        local src_parent_norm = normalize_path(vim.fn.fnamemodify(src_path, ":h"))
+        local target_norm = normalize_path(target_dir)
+
+        if src_norm == target_norm or src_parent_norm == target_norm then
+          vim.notify("ℹ️ '" .. src_name .. "' sudah berada di folder tersebut.", vim.log.levels.INFO)
+          return
+        end
+
+        if target_norm:sub(1, #src_norm + 1) == src_norm .. "/" then
+          vim.notify("⚠️ Tidak bisa memindahkan folder ke dalam dirinya sendiri.", vim.log.levels.WARN)
+          return
+        end
+
+        local fs_actions = require("neo-tree.sources.filesystem.lib.fs_actions")
+        local utils = require("neo-tree.utils")
+        local manager = require("neo-tree.sources.manager")
+        local dest = target_dir .. utils.path_separator .. src_name
+
+        fs_actions.move_node(src_path, dest, function()
+          manager.refresh("filesystem")
+          vim.notify(
+            string.format("📦 Dipindahkan: %s → %s/", src_name, vim.fn.fnamemodify(target_dir, ":t")),
+            vim.log.levels.INFO
+          )
+        end, target_dir)
+      end
+
       require("neo-tree").setup({
         close_if_last_window = false,
         popup_border_style = "rounded",
@@ -89,6 +224,7 @@ return {
           mappings = {
             ["<space>"] = "none",
             ["<cr>"] = "open",
+            ["<2-LeftMouse>"] = "open",
             ["l"] = "open",
             ["h"] = "close_node",
             ["s"] = "open_vsplit",
@@ -117,10 +253,18 @@ return {
             ["r"] = "rename",
             ["<Del>"] = "delete",
             ["d"] = "delete",
+            -- Copy / Cut / Paste File & Folder ala VS Code (Duplikat & Pindah)
+            ["<C-c>"] = "copy_to_clipboard",
+            ["y"] = "copy_to_clipboard",
+            ["<C-x>"] = "cut_to_clipboard",
+            ["x"] = "cut_to_clipboard",
+            ["<C-v>"] = "paste_from_clipboard",
+            ["p"] = "paste_from_clipboard",
+            ["<Esc>"] = "clear_clipboard",
             ["c"] = "copy",
             ["m"] = "move",
-            -- Fitur Baru: Copy Path ke Clipboard (Ctrl+C) & Buka di Aplikasi Windows/Explorer (o)
-            ["<C-c>"] = function(state)
+            -- Copy Path Lengkap ke Clipboard Windows (Y) & Buka di Windows Explorer (o)
+            ["Y"] = function(state)
               local node = state.tree:get_node()
               if node then
                 local path = node:get_id()
@@ -145,6 +289,14 @@ return {
         },
 
         filesystem = {
+          window = {
+            mappings = {
+              -- Mouse Drag-and-Drop file/folder langsung ke folder tujuan di Sidebar
+              ["<LeftMouse>"] = handle_drag_mouse_down,
+              ["<LeftDrag>"] = handle_drag_mouse_move,
+              ["<LeftRelease>"] = handle_drag_mouse_release,
+            },
+          },
           filtered_items = {
             visible = true,
             hide_dotfiles = false,
