@@ -280,7 +280,7 @@ return {
             ["r"] = "rename",
             ["<Del>"] = "delete",
             ["d"] = "delete",
-            -- Copy / Cut / Paste File & Folder ala VS Code (Duplikat & Pindah)
+            -- Copy / Cut / Paste File & Folder ala VS Code (Duplikat, Pindah & Import dari Windows Explorer)
             -- Mendukung y/x/p, Alt+C/X/V (anti dibajak Windows Terminal), dan Ctrl+C/X/V
             ["<C-c>"] = "copy_to_clipboard",
             ["<A-c>"] = "copy_to_clipboard",
@@ -288,9 +288,15 @@ return {
             ["<C-x>"] = "cut_to_clipboard",
             ["<A-x>"] = "cut_to_clipboard",
             ["x"] = "cut_to_clipboard",
-            ["<C-v>"] = "paste_from_clipboard",
-            ["<A-v>"] = "paste_from_clipboard",
-            ["p"] = "paste_from_clipboard",
+            ["<C-v>"] = function(state)
+              require("custom.external_drop").smart_paste_in_neotree(state)
+            end,
+            ["<A-v>"] = function(state)
+              require("custom.external_drop").smart_paste_in_neotree(state)
+            end,
+            ["p"] = function(state)
+              require("custom.external_drop").smart_paste_in_neotree(state)
+            end,
             ["<Esc>"] = "clear_clipboard",
             ["c"] = "copy",
             ["m"] = "move",

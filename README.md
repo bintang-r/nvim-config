@@ -67,7 +67,7 @@ Berikut adalah tampilan antarmuka Neovim VS Code Edition dalam aksi:
    - **Server LSP otomatis** (Intelephense, Tailwind, TS, HTML/CSS/JSON, ESLint, Vue, Svelte, Prisma, Go, Python, C/C++, Java, Kotlin, Bash, YAML, Docker, CMake) — pasang otomatis lewat Mason; cek dengan `:Mason`.
 8. **🔲 Select Code Presisi & 📦 Drag-and-Drop / Copy-Cut-Paste File Explorer**:
    - **Seleksi kode ala VS Code**: `Shift + Panah`, `Ctrl + Shift + Left/Right`, `Shift + Home/End`, `Ctrl + L` (select baris), `Alt + D` (select kata), serta **Treesitter Smart Selection** (`Alt + A` perluas / `Alt + Z` perkecil blok kode).
-   - **Kelola file langsung di Sidebar Explorer**: dukung **🖱️ Mouse Drag & Drop** untuk memindahkan file/folder ke folder tujuan, serta **`Ctrl + C` / `y`** (Copy), **`Ctrl + X` / `x`** (Cut), dan **`Ctrl + V` / `p`** (Paste untuk duplikat atau pindah file).
+   - **Kelola & Import File langsung di Sidebar Explorer**: dukung **🖱️ Mouse Drag & Drop** antar folder di Sidebar **maupun drag file/folder dari Windows File Explorer langsung ke folder Sidebar** *(persis VS Code)*, serta **`y` / `Alt + C` / `Ctrl + C`** (Copy), **`x` / `Alt + X` / `Ctrl + X`** (Cut), dan **`p` / `Alt + V` / `Ctrl + V`** (Paste — otomatis mendukung paste file hasil `Ctrl + C` dari Windows Explorer!).
 
 ---
 
@@ -113,10 +113,11 @@ C:\_neovim\nvim.cmd .
 ### 1c. 📦 Kelola File & Folder di Sidebar Explorer (*Drag, Copy, Cut & Paste*)
 | Aksi / Shortcut *(di Sidebar)* | Fungsi |
 | :--- | :--- |
-| **🖱️ Drag & Drop Mouse** | **Tarik & Lepas File/Folder** ke folder tujuan untuk memindahkan file langsung *(tersedia notifikasi live saat menyeret)* |
+| **🖱️ Drag & Drop Mouse *(Internal)*** | **Tarik & Lepas File/Folder** di Sidebar ke folder tujuan untuk memindahkan file langsung *(tersedia notifikasi live saat menyeret)* |
+| **📥 Drag dari Windows Explorer** | **Tarik File/Folder dari Windows File Explorer** dan lepas ke folder yang sedang disorot di Sidebar → otomatis tersalin masuk ke folder tersebut *(aman dari overwrite: otomatis beri `(1)` jika nama sama)* |
 | **`y`** / **`Alt + C`** / **`Ctrl + C`** | **Copy File/Folder** ke clipboard Explorer *(siap diduplikat; gunakan `y` atau `Alt + C` jika `Ctrl + C` dipakai Windows Terminal)* |
 | **`x`** / **`Alt + X`** / **`Ctrl + X`** | **Cut File/Folder** ke clipboard Explorer *(siap dipindahkan)* |
-| **`p`** / **`Alt + V`** / **`Ctrl + V`** | **Paste ke Folder Tujuan** — otomatis **duplikat** jika dari Copy, atau **pindah** jika dari Cut |
+| **`p`** / **`Alt + V`** / **`Ctrl + V`** | **Paste ke Folder Tujuan** — otomatis **duplikat** jika dari Copy, **pindah** jika dari Cut, **atau langsung paste file/folder hasil `Ctrl + C` dari Windows File Explorer!** |
 | **`c`** / **`m`** | **Copy / Move Cepat** dengan input path tujuan |
 | **`Y`** | **Salin Path Lengkap** file/folder ke Clipboard Windows |
 | **`Esc`** | **Batalkan** antrean Copy / Cut di Sidebar |
@@ -217,7 +218,7 @@ Here is a preview of the Neovim VS Code Edition interface in action:
    - **Automatic LSP servers** (Intelephense, Tailwind, TS, HTML/CSS/JSON, ESLint, Vue, Svelte, Prisma, Go, Python, C/C++, Java, Kotlin, Bash, YAML, Docker, CMake) — installed via Mason; check with `:Mason`.
 8. **🔲 Precise Code Selection & 📦 Drag-and-Drop / Copy-Cut-Paste File Explorer**:
    - **VS Code-style code selection**: `Shift + Arrows`, `Ctrl + Shift + Left/Right`, `Shift + Home/End`, `Ctrl + L` (select line), `Alt + D` (select word), plus **Treesitter Smart Selection** (`Alt + A` expand / `Alt + Z` shrink code block).
-   - **Direct Sidebar Explorer file management**: supports **🖱️ Mouse Drag & Drop** to move files/folders into target folders, plus **`Ctrl + C` / `y`** (Copy), **`Ctrl + X` / `x`** (Cut), and **`Ctrl + V` / `p`** (Paste to duplicate or move).
+   - **Direct Sidebar Explorer file management & external import**: supports **🖱️ Mouse Drag & Drop** between Sidebar folders **and dragging files/folders directly from Windows File Explorer into a Sidebar folder** *(just like VS Code)*, plus **`y` / `Alt + C` / `Ctrl + C`** (Copy), **`x` / `Alt + X` / `Ctrl + X`** (Cut), and **`p` / `Alt + V` / `Ctrl + V`** (Paste — also pastes files copied with `Ctrl + C` from Windows File Explorer!).
 
 ---
 
@@ -263,10 +264,11 @@ C:\_neovim\nvim.cmd .
 ### 1c. 📦 Sidebar File Operations (*Drag, Copy, Cut & Paste*)
 | Action / Shortcut *(in Sidebar)* | Description |
 | :--- | :--- |
-| **🖱️ Mouse Drag & Drop** | **Drag & Drop File/Folder** onto a target folder to move it directly *(with live drag preview)* |
+| **🖱️ Mouse Drag & Drop *(Internal)*** | **Drag & Drop File/Folder** onto a target Sidebar folder to move it directly *(with live drag preview)* |
+| **📥 Drag from Windows Explorer** | **Drag File/Folder from Windows File Explorer** and drop onto the highlighted Sidebar folder → automatically copies it into that folder *(safe auto-rename `(1)` on collision)* |
 | **`y`** / **`Alt + C`** / **`Ctrl + C`** | **Copy File/Folder** to Explorer clipboard *(ready to duplicate; use `y` or `Alt + C` if Windows Terminal intercepts `Ctrl + C`)* |
 | **`x`** / **`Alt + X`** / **`Ctrl + X`** | **Cut File/Folder** to Explorer clipboard *(ready to move)* |
-| **`p`** / **`Alt + V`** / **`Ctrl + V`** | **Paste into Target Folder** — automatically **duplicates** on Copy or **moves** on Cut |
+| **`p`** / **`Alt + V`** / **`Ctrl + V`** | **Paste into Target Folder** — automatically **duplicates** on Copy, **moves** on Cut, **or pastes files/folders copied with `Ctrl + C` from Windows File Explorer!** |
 | **`c`** / **`m`** | **Quick Copy / Move** with destination path prompt |
 | **`Y`** | **Copy Full Path** of file/folder to Windows Clipboard |
 | **`Esc`** | **Clear** Explorer Copy / Cut clipboard |

@@ -178,11 +178,15 @@ keymap("v", "<C-v>", '"+p', { desc = "📥 Paste dari Clipboard (Ctrl+V)" })
 -- Visual Block Mode tetap bisa diakses lewat Alt + V
 keymap("n", "<A-v>", "<C-v>", { desc = "Visual Block Mode (Alt+V)" })
 
--- Pengaman Terminal Bracketed Paste (Windows Terminal Ctrl+V) di buffer read-only / Sidebar Neo-tree
--- Mencegah error E21 ('modifiable' is off) sekaligus meneruskan Ctrl+V di Neo-tree ke Paste File!
+-- Pengaman Terminal Bracketed Paste (Windows Terminal Ctrl+V & Drag File dari Windows Explorer)
+-- Mencegah error E21 ('modifiable' is off) sekaligus mendukung:
+--   1) Drag-and-drop file/folder dari Windows Explorer langsung ke Sidebar Neo-tree
+--   2) Paste file dari clipboard Neo-tree ATAU hasil Ctrl+C dari Windows File Explorer!
 if not vim.g._safe_paste_installed then
   vim.g._safe_paste_installed = true
   local orig_paste = vim.paste
+  local neotree_paste_buf = {}
+
   vim.paste = function(lines, phase)
     local mode = vim.api.nvim_get_mode().mode
     -- Biarkan paste normal di Command-line (:) dan Terminal (PowerShell)
@@ -192,26 +196,20 @@ if not vim.g._safe_paste_installed then
 
     if vim.bo.filetype == "neo-tree" then
       if phase == -1 or phase == 1 then
+        neotree_paste_buf = {}
+      end
+      if type(lines) == "table" then
+        for _, l in ipairs(lines) do
+          table.insert(neotree_paste_buf, l)
+        end
+      end
+      if phase == -1 or phase == 3 then
+        local captured = neotree_paste_buf
+        neotree_paste_buf = {}
         vim.schedule(function()
-          local ok_mgr, manager = pcall(require, "neo-tree.sources.manager")
-          if ok_mgr then
-            local state = manager.get_state("filesystem")
-            if state and state.clipboard and next(state.clipboard) ~= nil then
-              if state.resolved_mappings and state.resolved_mappings["p"] and state.resolved_mappings["p"].handler then
-                state.resolved_mappings["p"].handler()
-              else
-                local ok_cmd, fs_cmds = pcall(require, "neo-tree.sources.filesystem.commands")
-                if ok_cmd then
-                  state.config = state.config or {}
-                  fs_cmds.paste_from_clipboard(state)
-                end
-              end
-            else
-              vim.notify(
-                "💡 Di Sidebar: tekan 'y' / 'Alt+C' (Copy) atau 'x' / 'Alt+X' (Cut) pada file/folder dulu, lalu 'p' / 'Alt+V' / 'Ctrl+V' untuk Paste.",
-                vim.log.levels.INFO
-              )
-            end
+          local ok_ext, ext = pcall(require, "custom.external_drop")
+          if ok_ext then
+            ext.smart_paste_in_neotree(nil, captured)
           end
         end)
       end
