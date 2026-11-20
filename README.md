@@ -71,6 +71,9 @@ C:\_neovim\nvim.cmd .
 
 | Shortcut | Fungsi (Standar VS Code) |
 | :--- | :--- |
+| **`Enter`** *(di Normal Mode maupun Insert Mode)* | **Buat Baris Baru (New Line)** — Langsung membuat baris baru dan otomatis masuk ke mode ketik (*Insert Mode*) tanpa tertahan popup autocomplete |
+| **`Ctrl + Enter`** *(atau `Shift + Enter`)* | **Insert Line Below** — Buat baris baru di bawah meskipun kursor sedang berada di tengah-tengah baris kode |
+| **`Alt + Enter`** *(atau `Ctrl + Shift + Enter`)* | **Insert Line Above** — Buat baris baru tepat di atas baris aktif dan langsung siap mengetik |
 | **`Ctrl + Z`** | **Undo** — Batalkan perubahan terakhir |
 | **`Ctrl + Y`** | **Redo** — Ulangi perubahan yang dibatalkan |
 | **`Ctrl + D`** | **Duplicate Line / Selection** — Duplikat baris aktif atau blok teks ke bawah |

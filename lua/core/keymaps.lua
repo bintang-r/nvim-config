@@ -29,6 +29,41 @@ keymap("n", "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true, 
 keymap("n", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true, silent = true })
 
 -- ============================================================================
+-- 0. BUAT BARIS BARU (NEW LINE) PERSIS VS CODE (Enter, Ctrl+Enter, Alt+Enter)
+-- ============================================================================
+-- Di Normal Mode (saat baru klik baris kode): Tekan ENTER langsung buat baris baru & masuk Mode Ketik (Insert)!
+keymap("n", "<CR>", function()
+  local bt = vim.bo.buftype
+  local ft = vim.bo.filetype
+  if bt ~= "" or not vim.bo.modifiable or ft == "neo-tree" or ft == "alpha" or ft == "qf" then
+    return "<CR>"
+  end
+  return "o"
+end, { expr = true, noremap = true, silent = true, desc = "↵ Buat Baris Baru & Masuk Mode Ketik (Enter)" })
+
+-- Buat Baris Baru di Bawah dari posisi tengah baris mana pun (Ctrl+Enter atau Shift+Enter) ala VS Code
+keymap("n", "<C-CR>", "o", { desc = "↵ Buat Baris Baru di Bawah (Ctrl+Enter)" })
+keymap("i", "<C-CR>", "<Esc>o", { desc = "↵ Buat Baris Baru di Bawah (Ctrl+Enter)" })
+keymap("n", "<S-CR>", "o", { desc = "↵ Buat Baris Baru di Bawah (Shift+Enter)" })
+keymap("i", "<S-CR>", "<Esc>o", { desc = "↵ Buat Baris Baru di Bawah (Shift+Enter)" })
+
+-- Buat Baris Baru di Atas baris aktif (Alt+Enter atau Ctrl+Shift+Enter) ala VS Code
+keymap("n", "<A-CR>", "O", { desc = "↵ Buat Baris Baru di Atas (Alt+Enter)" })
+keymap("i", "<A-CR>", "<Esc>O", { desc = "↵ Buat Baris Baru di Atas (Alt+Enter)" })
+keymap("n", "<C-S-CR>", "O", { desc = "↵ Buat Baris Baru di Atas (Ctrl+Shift+Enter)" })
+keymap("i", "<C-S-CR>", "<Esc>O", { desc = "↵ Buat Baris Baru di Atas (Ctrl+Shift+Enter)" })
+
+-- Di Normal Mode: Tekan Backspace pada file kode akan menghapus karakter ke kiri & masuk mode ketik seperti VS Code
+keymap("n", "<BS>", function()
+  local bt = vim.bo.buftype
+  local ft = vim.bo.filetype
+  if bt ~= "" or not vim.bo.modifiable or ft == "neo-tree" or ft == "alpha" or ft == "qf" then
+    return "<BS>"
+  end
+  return "i<BS>"
+end, { expr = true, noremap = true, silent = true, desc = "⌫ Hapus Karakter & Masuk Mode Ketik (Backspace)" })
+
+-- ============================================================================
 -- 1. UNDO, REDO, SAVE, SELECT ALL (Ctrl+Z, Ctrl+Y, Ctrl+S, Ctrl+A)
 -- ============================================================================
 -- Undo (Ctrl + Z) di Normal, Insert, dan Visual Mode
