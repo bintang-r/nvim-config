@@ -21,6 +21,43 @@ return {
     },
   },
 
+  -- 1b. MASON-LSPCONFIG: otomatis pasang & aktifkan server LSP yang terpasang di VS Code
+  --     (Intelephense, Tailwind, TS, Vue, Svelte, Prisma, Go, Python, C/C++, Java, Kotlin, dll.)
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = { "williamboman/mason.nvim" },
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      ensure_installed = {
+        "lua_ls",
+        "intelephense",   -- VS Code: bmewburn.vscode-intelephense-client
+        "tailwindcss",    -- VS Code: bradlc.vscode-tailwindcss
+        "ts_ls",          -- VS Code: ms-vscode.vscode-typescript-next
+        "html",
+        "cssls",
+        "jsonls",
+        "eslint",         -- VS Code: dbaeumer.vscode-eslint
+        -- volar sudah diwakili vue_ls di Mason (volar tidak punya mapping paket)
+        "vue_ls",         -- VS Code: vue.volar
+        "svelte",         -- VS Code: svelte.svelte-vscode
+        "prismals",       -- VS Code: prisma.prisma
+        "gopls",          -- VS Code: golang.go
+        "pyright",        -- VS Code: ms-python.python / pylance
+        "clangd",         -- VS Code: ms-vscode.cpptools
+        "bashls",
+        "yamlls",
+        "dockerls",       -- VS Code: ms-azuretools.vscode-docker
+        "cmake",          -- VS Code: ms-vscode.cmake-tools
+        "jdtls",          -- VS Code: redhat.java
+        -- csharp_ls & dartls tidak tersedia di Mason; pasang via dotnet/Dart SDK bila perlu.
+        "kotlin_language_server", -- VS Code: fwcd.kotlin / mathiasfrohlich.kotlin
+        -- gdscript tidak tersedia di Mason; gunakan Godot + gdtoolkit bila perlu.
+      },
+      -- Nvim 0.11: aktifkan otomatis server yang sudah terpasang via vim.lsp.enable()
+      automatic_enable = true,
+    },
+  },
+
   -- 2. Konfigurasi Diagnostic & Keymap LSP Bergaya VS Code
   {
     "neovim/nvim-lspconfig",

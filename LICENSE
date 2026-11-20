@@ -1,77 +1,52 @@
 ================================================================================
               PROPRIETARY LICENSE — ALL RIGHTS RESERVED
-        LISENSI HAK CIPTA EKSKLUSIF — SELURUH HAK DILINDUNGI
 ================================================================================
 
 Copyright (c) 2026 Muhammad Bintang. All Rights Reserved.
-Hak Cipta (c) 2026 Muhammad Bintang. Seluruh Hak Cipta Dilindungi Undang-Undang.
 
---------------------------------------------------------------------------------
-[BAHASA INDONESIA — KETENTUAN LISENSI EKSKLUSIF]
---------------------------------------------------------------------------------
-
-Perangkat lunak, kode sumber, arsitektur konfigurasi Lua Neovim (VS Code Edition),
-modul kustom, skrip otomasi, serta seluruh dokumentasi yang terdapat di dalam
-repositori/direktori ini adalah HAK MILIK EKSKLUSIF dari:
-
-    Pemegang Hak Cipta : MUHAMMAD BINTANG
-    Status Lisensi     : Proprietary / Tertutup (All Rights Reserved)
-    Perlindungan Hukum : UU Republik Indonesia No. 28 Tahun 2014 tentang Hak Cipta
-                         & Konvensi Internasional Hak Cipta (Berne Convention)
-
-DILARANG KERAS TANPA IZIN TERTULIS DARI PEMEGANG HAK CIPTA (MUHAMMAD BINTANG):
-1. Dilarang Menggunakan (No Unauthorized Use):
-   Pihak mana pun selain Pemegang Hak Cipta dilarang menjalankan, memasang,
-   atau menggunakan kode dan konfigurasi ini pada perangkat apa pun.
-2. Dilarang Menyalin & Menggandakan (No Copying / Cloning):
-   Dilarang menyalin, mengunduh, melakukan fork, atau menggandakan sebagian
-   maupun seluruh isi kode sumber ini dalam bentuk apa pun.
-3. Dilarang Memodifikasi & Membuat Karya Turunan (No Modification / Derivatives):
-   Dilarang mengubah, mengadaptasi, memodifikasi, atau menggabungkan kode ini
-   ke dalam proyek atau perangkat lunak lain.
-4. Dilarang Mendistribusikan atau Mempublikasikan (No Redistribution):
-   Dilarang membagikan, mengunggah ulang, menjual, atau menyebarluaskan
-   perangkat lunak dan konfigurasi ini secara publik maupun privat.
-5. Dilarang Menghapus Atribusi & Sistem Pengunci Lisensi (No Tampering):
-   Dilarang menghapus pemberitahuan hak cipta ini atau memodifikasi modul
-   verifikasi lisensi perangkat (`lua/core/license.lua`).
-
-Setiap pelanggaran terhadap ketentuan lisensi ini merupakan pelanggaran Hak Cipta
-dan dapat dikenakan sanksi hukum perdata maupun pidana sesuai peraturan
-perundang-undangan yang berlaku.
-
---------------------------------------------------------------------------------
-[ENGLISH — STRICT PROPRIETARY & NON-USAGE LICENSE]
---------------------------------------------------------------------------------
-
-This software, source code, modular Neovim Lua configuration, custom scripts,
-design assets, and associated documentation files (collectively, the "Software")
-are the EXCLUSIVE PROPERTY of MUHAMMAD BINTANG.
+This software, source code, modular Neovim Lua configuration (VS Code Edition),
+custom Lua modules, automation scripts, and associated documentation files
+(collectively, the "Software") are the EXCLUSIVE PROPERTY of MUHAMMAD BINTANG.
 
 ALL RIGHTS ARE RESERVED.
 
-Unlike open-source licenses (such as MIT, GPL, or Apache), this Software is
-NOT open-source and is NOT licensed for public, educational, personal, or
+Unlike open-source licenses (such as MIT, BSD, GPL, or Apache), this Software is 
+NOT open-source and is NOT licensed for public, educational, personal, or 
 commercial use by third parties.
 
-STRICT RESTRICTIONS:
-1. NO USE: You may NOT use, execute, install, or run this Software on any
-   machine or environment without explicit prior written authorization from
-   Muhammad Bintang.
-2. NO COPYING OR FORKING: You may NOT copy, clone, fork, archive, or duplicate
-   any portion of this Software.
-3. NO MODIFICATION: You may NOT modify, adapt, translate, reverse-engineer,
-   or create derivative works based upon this Software.
-4. NO REDISTRIBUTION: You may NOT distribute, publish, sublicense, transfer,
-   or sell copies of this Software to any third party.
-5. NO REMOVAL OF NOTICES: You may NOT remove or alter any copyright notices,
-   watermarks, or technical license enforcement mechanisms included in the
-   Software.
+--------------------------------------------------------------------------------
+1. STRICT RESTRICTIONS
+--------------------------------------------------------------------------------
+1. NO USE: You may NOT use, execute, install, or run this Software on any 
+   machine, server, or environment without explicit prior written authorization 
+   from Muhammad Bintang.
+2. NO COPYING OR FORKING: You may NOT copy, clone, fork, archive, mirror, or 
+   duplicate any portion of this Software in any form or media.
+3. NO MODIFICATION: You may NOT modify, adapt, translate, reverse-engineer, 
+   decompile, or create derivative works based upon this Software.
+4. NO REDISTRIBUTION: You may NOT distribute, publish, sublicense, transfer, 
+   lease, or sell copies of this Software to any third party.
+5. NO TAMPERING: You may NOT remove or alter any copyright notices, watermarks, 
+   or technical license enforcement mechanisms (including `lua/core/license.lua`) 
+   included in the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", EXCLUSIVELY FOR THE COPYRIGHT HOLDER
-(MUHAMMAD BINTANG), WITHOUT WARRANTY OF ANY KIND TO ANY UNAUTHORIZED PARTY.
-UNAUTHORIZED USE, REPRODUCTION, OR DISTRIBUTION IS A DIRECT VIOLATION OF
-COPYRIGHT LAW AND WILL BE PROSECUTED TO THE MAXIMUM EXTENT PERMITTED BY LAW.
+--------------------------------------------------------------------------------
+2. HARDWARE-BOUND LICENSE ENFORCEMENT
+--------------------------------------------------------------------------------
+This repository features an integrated hardware-bound proprietary license verification 
+system (`lua/core/license.lua`). Unauthorized execution of this configuration on 
+foreign hardware will automatically trigger license verification failure, block editor 
+access, and display an exclusive proprietary notice.
+
+--------------------------------------------------------------------------------
+3. DISCLAIMER & LEGAL ACTION
+--------------------------------------------------------------------------------
+THE SOFTWARE IS PROVIDED "AS IS", EXCLUSIVELY FOR THE COPYRIGHT HOLDER 
+(MUHAMMAD BINTANG), WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. 
+
+UNAUTHORIZED USE, REPRODUCTION, DISTRIBUTION, OR CIRCUMVENTION OF THE LICENSE 
+PROTECTION MECHANISM IS A DIRECT VIOLATION OF INTERNATIONAL COPYRIGHT LAW AND 
+WILL BE PROSECUTED TO THE FULLEST EXTENT PERMITTED BY LAW.
 
 ================================================================================
 © 2026 Muhammad Bintang — Exclusive Proprietary License (All Rights Reserved)

@@ -1,155 +1,271 @@
 # ⚡ Neovim VS Code Edition — FiraCode Nerd Font & Modular Lua IDE (`C:\_neovim`)
 
-Dokumentasi resmi konfigurasi **Neovim v0.11.5 (100% Modular Lua)** yang dirancang dengan pengalaman, tampilan, **Multi-Terminal**, dan **shortcut keyboard standar Visual Studio Code** — **tanpa perlu kombinasi tombol `<Space>`**.
+[🇮🇩 Bahasa Indonesia](#-bahasa-indonesia) | [🇬🇧 English](#-english)
+
+---
+
+<a id="-bahasa-indonesia"></a>
+# 🇮🇩 Bahasa Indonesia
+
+Dokumentasi resmi konfigurasi **Neovim v0.11.5 (100% Modular Lua)** yang dirancang khusus untuk menghadirkan pengalaman, tampilan modern, **Multi-Terminal**, dan **shortcut keyboard 100% standar Visual Studio Code** — **tanpa perlu kombinasi tombol `<Space>`**.
+
+---
+
+## 📸 Tangkapan Layar (*Screenshots Gallery*)
+
+Berikut adalah tampilan antarmuka Neovim VS Code Edition dalam aksi:
+
+### 1. Dashboard Awal (*Grouped Menu & Bilingual ID / EN*)
+> *Halaman sambutan terkelompok rapi per kategori dengan pilihan Bahasa Indonesia / English (`Alt + L`) dan Project Picker (`Ctrl + Shift + O`).*
+
+![Dashboard Neovim](./screenshots/dashboard.png)
+
+### 2. Tampilan Utama Editor, Sidebar & Winbar Tab (VS Code Style)
+> *Menampilkan sidebar Neo-tree di kiri, baris tab Bufferline di atas, editor kode dengan FiraCode Nerd Font, Winbar navigasi interaktif, dan status bar bawah.*
+
+![Editor & Winbar View](./screenshots/editor-winbar.png)
+
+### 3. Fitur Kotak Input Mengambang (*Floating Input Modal*) untuk Buat File & Folder
+> *Kotak input mengambang di tengah layar saat Anda menekan `Ctrl + N` (Buat File) atau `Alt + N` (Buat Folder).*
+
+![Floating Input Modal](./screenshots/floating-input.png)
+
+### 4. Multi-Terminal Manager & Split Terminal di Panel Bawah
+> *Panel terminal bawah yang mendukung banyak tab PowerShell (`PowerShell #1`, `#2`, `#3`), Split Terminal, dan tombol kontrol interaktif.*
+
+![Multi-Terminal Manager](./screenshots/multi-terminal.png)
 
 ---
 
 ## 🌟 Fitur Utama
 
-1. **󰛖 Font FiraCode Nerd Font (Teks + Ligatures + Ikon Lengkap)**:
-   - Teks kode menggunakan **FiraCode Nerd Font** (tersimpan di `C:\_neovim\fonts\` & terinstal di Windows Fonts) yang sudah aktif otomatis di **Windows Terminal**, **VS Code Integrated Terminal**, dan **Neovim**.
-   - Dilengkapi **3 paket ikon** (`nvim-web-devicons`, `mini.icons`, dan `lspkind.nvim`) untuk menampilkan ikon warna file (`` HTML, `` CSS, `` JS, `` Lua, `` Markdown, `󰸭` Gambar), folder (` / `), status Git (``), hingga ikon *autocomplete*.
-2. **📄 Buat File Baru (`Ctrl + N`) & 📁 Buat Directory Baru (`Alt + N`) dengan Popup Mengambang**:
-   - Menampilkan **Kotak Input Mengambang (*Floating Input Modal*)** tepat di tengah layar ala VS Code.
-   - Bekerja dari mana saja: saat kursor di Editor, saat kursor di Sidebar Kiri (`a`/`n` untuk File, `A`/`N` untuk Folder), maupun lewat **klik mouse** pada tombol **`[ +󰈔 Buat File (Ctrl+N) ]`** dan **`[ + Buat Folder (Alt+N) ]`** di kanan atas editor.
-3. ** Multi-Terminal Manager (Bisa Tambah Banyak Terminal & Split Terminal!)**:
-   - Buka/sembunyikan panel terminal bawah dengan **`Ctrl + T`** (atau **`Ctrl + \`** / **`F7`**).
-   - **Tambah Terminal Baru (`PowerShell #1`, `#2`, `#3`, dst.)** menggunakan **`Alt + =`** atau **`Ctrl + Shift + T`** atau klik tombol **`[ + Tambah Terminal (Alt+=) ]`**.
-   - **Pindah antar Tab Terminal** cukup dengan klik mouse pada tab **`[ 1: PowerShell #1 ]` `[ 2: PowerShell #2 ]`** di header terminal, atau tekan **`Alt + [`** dan **`Alt + ]`**.
-   - **Split 2 Terminal Berdampingan** (kiri & kanan di panel bawah) dengan **`Alt + \`** (di dalam terminal) atau klik **`[ ◫ Split (Alt+\) ]`**.
-4. **⌨️ 100% Shortcut Standar VS Code (Tanpa Kombinasi `<Space>`)**:
-   - Semua perintah menggunakan kombinasi **`Ctrl`**, **`Alt`**, atau **`F1`–`F12`** yang langsung bekerja di **Normal Mode**, **Insert Mode**, maupun **Visual Mode** (`Ctrl+Z` Undo, `Ctrl+Y` Redo, `Ctrl+D` Duplikat, `Ctrl+C` Copy, `Ctrl+V` Paste, `Ctrl+S` Save).
+1. **󰛖 Font FiraCode Nerd Font & Ikon Lengkap**:
+   - Menggunakan **FiraCode Nerd Font** dengan *ligatures* yang aktif otomatis di Windows Terminal, VS Code Terminal, dan Neovim.
+   - Dilengkapi 3 paket ikon (`nvim-web-devicons`, `mini.icons`, `lspkind.nvim`) untuk mewarnai jenis file, folder, dan autocomplete.
+2. **📄 Buat File & Folder dengan Floating Modal**:
+   - Kotak input elegan di tengah layar (`Ctrl + N` untuk File, `Alt + N` untuk Folder). Mendukung pembuatan direktori otomatis jika diakhiri `/`.
+3. ** Multi-Terminal Manager**:
+   - Tambah banyak tab terminal (`Alt +=`), Split Terminal berdampingan (`Alt + \`), dan pindah antar terminal (`Alt + ]` / `Alt + [`).
+4. **⌨️ 100% Shortcut Standar VS Code**:
+   - Seluruh navigasi dan editing menggunakan `Ctrl`, `Alt`, dan `F1–F12` tanpa tombol `<Space>`.
+ 5. **🌐 Menu Pilih Bahasa (Dashboard)**:
+   - Dashboard tersusun rapi per kategori (File, Cari/Terminal, Git, Preferensi) dengan shortcut yang sejajar.
+   - Pilih **Bahasa Indonesia** atau **English** lewat tombol `󰖟` di Dashboard, `Alt + L`, atau perintah `:Lang` (`:LangID` / `:LangEN`).
+   - Pilihan tersimpan otomatis dan langsung memperbarui teks menu Dashboard serta badge bahasa di status bar.
+ 6. **󰉋 Buka Project / Directory**:
+   - Tekan tombol `󰉋` di Dashboard, `Ctrl + Shift + O`, atau perintah `:OpenProject` untuk mencari folder project.
+   - Pencarian memakai Telescope (project terakhir muncul lebih dulu), lalu `Enter` untuk masuk.
+   - Neovim otomatis pindah `cwd` ke folder itu, Dashboard ditutup, dan Sidebar Neo-tree langsung menampilkan isi project tersebut.
+   - Root awal paling luar: **semua drive** (`C:\`, `D:\`, ...) + `~` + cwd, jadi folder seperti `C:\laragon\www` atau file perkuliahan ikut kesearch.
+   - Atur sendiri: `vim.g.nvim_project_roots = { "D:/project", "C:/work" }` dan kedalaman `vim.g.nvim_project_depth = 3` (default).
+ 7. **🧩 Ekstensi VS Code → Plugin Neovim**:
+    - **Auto Rename Tag / Auto Close Tag** (`nvim-ts-autotag`) — ganti nama tag HTML/PHP/JSX/Vue/Svelte otomatis di pembuka & penutup.
+    - **Color Highlight** (`nvim-colorizer`) — warna hex/rgb/hsl/nama warna & kelas Tailwind tampil langsung di editor.
+    - **Better Comments** (`todo-comments`) — soroti `TODO`, `FIXME`, `WARN`, `HACK`, `NOTE`; daftarkan lewat `Alt + C`.
+    - **Error Lens** (`trouble`) — panel error LSP `Alt + M` (semua: `Alt + Shift + M`) + pesan inline di baris kursor.
+    - **WakaTime** & **Discord Rich Presence** —Memakai `~/.wakatime.cfg` yang sudah ada.
+    - **Server LSP otomatis** (Intelephense, Tailwind, TS, HTML/CSS/JSON, ESLint, Vue, Svelte, Prisma, Go, Python, C/C++, Java, Kotlin, Bash, YAML, Docker, CMake) — pasang otomatis lewat Mason; cek dengan `:Mason`.
 
 ---
 
 ## 🚀 Cara Membuka Neovim di Project
 
-Buka terminal (PowerShell / Windows Terminal) di dalam folder project Anda, lalu ketik:
-
+Buka terminal di dalam folder project Anda, lalu ketik:
 ```powershell
 nvim .
 ```
-*(atau panggil langsung dari `C:\_neovim`:)*
+*(atau panggil langsung dari `C:\_neovim`)*:
 ```powershell
 C:\_neovim\nvim.cmd .
 ```
-> **Penting**: Jika Neovim sudah terbuka sebelumnya, tutup dulu (`Ctrl + Q` atau `:qa!`) lalu buka kembali dengan `nvim .` agar konfigurasi terbaru dimuat.
+> **Catatan**: Jika Neovim sudah terbuka, tutup dulu (`Ctrl + Q` atau `:qa!`) lalu buka kembali dengan `nvim .` agar modul terbaru termuat sempurna.
 
 ---
 
-## ⌨️ Dokumentasi Lengkap Shortcut Keyboard (Standar VS Code — Tanpa `<Space>`)
+## ⌨️ Dokumentasi Shortcut Keyboard (Standar VS Code)
 
-### 1. 📄 Buat File Baru & 📁 Buat Directory / Folder Baru
-
-| Shortcut / Tombol | Fungsi & Cara Pakai |
+### 1. 📄 Buat File & 📁 Folder Baru
+| Shortcut / Tombol | Fungsi |
 | :--- | :--- |
-| **`Ctrl + N`** *(atau klik `[+󰈔 Buat File]`)* | **Buat File Baru (Create New File)** — Memunculkan kotak input mengambang di tengah layar. Ketik nama file (misal `baru.html` atau `assets/js/fitur.js`) lalu tekan **`Enter`**. Otomatis membuat folder induknya jika belum ada, membuka file di Tab editor kanan, dan menyegarkan Sidebar. *(Tips: Jika nama diakhiri `/`, misal `folderbaru/`, otomatis dibuat sebagai folder!)* |
-| **`Alt + N`** atau **`Ctrl + Shift + N`** *(atau klik `[+ Buat Folder]`)* | **Buat Directory / Folder Baru (Create New Folder)** — Memunculkan kotak input mengambang di tengah layar. Ketik nama folder (misal `components` atau `assets/icons`) lalu tekan **`Enter`**. Otomatis membuat folder dan menampilkannya di Sidebar Kiri. |
-| **`F2`** | **Rename File / Folder** — Mengubah nama file yang sedang dibuka (atau file/folder yang sedang disorot di dalam Sidebar). |
-| **`Alt + Delete`** | **Hapus File Aktif** — Menghapus file yang sedang dibuka (dengan popup konfirmasi aman `y`) dan menutup tab-nya. |
-| **Di dalam Sidebar (`Ctrl + B`)**: | • Tekan **`a`** atau **`n`** atau **`Ctrl + N`** untuk **Buat File Baru** di dalam folder yang disorot<br>• Tekan **`A`** atau **`N`** atau **`Alt + N`** untuk **Buat Directory / Folder Baru**<br>• Tekan **`F2`** atau **`r`** untuk **Rename** file/folder<br>• Tekan **`Delete`** atau **`d`** untuk **Hapus** file/folder |
+| **`Ctrl + N`** *(atau klik `[+󰈔 Buat File]`)* | **Buat File Baru** — Memunculkan kotak input mengambang di tengah layar. Ketik nama file, tekan **`Enter`**. |
+| **`Alt + N`** / **`Ctrl + Shift + N`** *(atau klik `[+ Buat Folder]`)* | **Buat Directory / Folder Baru** — Memunculkan kotak input mengambang, ketik nama folder, tekan **`Enter`**. |
+| **`F2`** | **Rename File / Folder** yang sedang dibuka atau disorot di Sidebar. |
+| **`Alt + Delete`** | **Hapus File Aktif** dengan konfirmasi aman `y`. |
+| **`Ctrl + Shift + O`** *(atau klik `[󰉋 Buka Project]`)* | **Buka Project / Directory** — Cari folder project via Telescope, `Enter` untuk pindah ke folder itu. |
+| **`Alt + L`** | **Pilih Bahasa** — Buka menu Bahasa Indonesia / English. |
 
----
+> **Catatan:** Shortcut navigasi (`Alt + Left/Right`, `Alt + 1`–`Alt + 9`, `Alt + X`, `Ctrl + B`, `Alt + E`, `Alt + S`, `Ctrl + Shift + O`) juga aktif **saat sedang mengetik** (insert mode). Klik file di Sidebar otomatis memaksa normal mode, dan klik kembali ke Terminal otomatis masuk mode ketik. (`Tab` tetap dipakai autocomplete saat mengetik.) `ripgrep` untuk pencarian sudah disertakan di `C:\_neovim\bin\rg.exe` dan otomatis masuk PATH Neovim.
 
-### 2.  Multi-Terminal PowerShell (Buka, Tutup, Tambah Banyak Terminal & Split)
-
-| Cara / Shortcut | Fungsi |
-| :--- | :--- |
-| **`Ctrl + T`** *(di Editor / di dalam Terminal)* | **Buka / Sembunyikan Panel Terminal Bawah** (semua terminal yang berjalan tetap hidup di latar belakang) |
-| **`Ctrl + \`** atau **`F7`** | **Buka / Sembunyikan Panel Terminal Bawah** |
-| **`Alt + =`** atau **`Ctrl + Shift + T`** | **➕ Tambah Terminal Baru** (`PowerShell #2`, `PowerShell #3`, dst.) — bisa juga klik **`[ + Tambah Terminal (Alt+=) ]`** di bar atas terminal atau **`[ + Term Baru ]`** di bar atas editor |
-| **`Alt + ]`** / **`Alt + [`** *(atau klik Tab Terminal)* | **Pindah ke Tab Terminal Berikutnya / Sebelumnya** (`[ 1: PowerShell #1 ]` ↔ `[ 2: PowerShell #2 ]`) |
-| **`Alt + \`** *(di dalam Terminal)* atau klik **`[ ◫ Split ]`** | **Split Terminal Kanan-Kiri** — Membuka 2 terminal berdampingan di panel bawah ala VS Code |
-| **`Alt + X`** *(di dalam Terminal)* atau klik **`[ 🗑 Hapus ]`** | **Hapus / Matikan Terminal Aktif** — Menutup 1 tab terminal yang sedang dipilih dan beralih ke tab terminal lainnya |
-| **`Alt + T`** | **Buka / Tutup Floating Terminal** (Terminal mengambang di tengah layar) |
-| **`Ctrl + ↑`** *(di dalam Terminal)* | Pindah kursor dari Terminal bawah ke Editor kode di atas tanpa menutup terminal |
-
----
-
-### 3. ✏️ Editing Dasar, Undo/Redo & Duplikat (Persis VS Code)
-*Semua shortcut di bawah ini berfungsi langsung baik di **Normal Mode**, **Insert Mode (saat sedang mengetik)**, maupun **Visual Mode (saat memblok teks)**:*
-
-| Shortcut | Fungsi (Standar VS Code) |
-| :--- | :--- |
-| **`Enter`** *(di Normal Mode maupun Insert Mode)* | **Buat Baris Baru (New Line)** — Langsung membuat baris baru dan otomatis masuk ke mode ketik (*Insert Mode*) tanpa tertahan popup autocomplete |
-| **`Ctrl + Enter`** *(atau `Shift + Enter`)* | **Insert Line Below** — Buat baris baru di bawah meskipun kursor sedang berada di tengah-tengah baris kode |
-| **`Alt + Enter`** *(atau `Ctrl + Shift + Enter`)* | **Insert Line Above** — Buat baris baru tepat di atas baris aktif dan langsung siap mengetik |
-| **`Ctrl + Z`** | **Undo** — Batalkan perubahan terakhir |
-| **`Ctrl + Y`** | **Redo** — Ulangi perubahan yang dibatalkan |
-| **`Ctrl + D`** | **Duplicate Line / Selection** — Duplikat baris aktif atau blok teks ke bawah |
-| **`Shift + Alt + ↓`** | **Duplicate Down** — Duplikat baris atau blok teks ke bawah |
-| **`Shift + Alt + ↑`** | **Duplicate Up** — Duplikat baris atau blok teks ke atas |
-| **`Alt + ↓`** *(atau `Alt + J`)* | **Move Line Down** — Geser baris atau blok teks ke bawah |
-| **`Alt + ↑`** *(atau `Alt + K`)* | **Move Line Up** — Geser baris atau blok teks ke atas |
-| **`Ctrl + C`** | **Copy** — Salin teks yang diblok (atau salin 1 baris penuh jika tidak ada yang diblok) |
-| **`Ctrl + X`** | **Cut** — Potong teks yang diblok (atau potong 1 baris penuh) |
-| **`Ctrl + V`** | **Paste** — Tempel teks dari Clipboard Windows |
-| **`Ctrl + A`** | **Select All** — Blok seluruh isi file |
-| **`Ctrl + /`** | **Toggle Comment** — Beri atau hapus komentar (`//`, `<!-- -->`, `--`) pada baris/blok kode |
-| **`Alt + Backspace`** | **Delete Line** — Hapus 1 baris aktif secara instan |
-| **`Tab`** / **`Shift + Tab`** *(saat blok teks)* | **Indent / Outdent** — Geser blok teks ke kanan / ke kiri |
-| **`F8`** atau **`Alt + Shift + F`** | **Format Document** — Rapikan kode otomatis (Prettier / Conform / LSP) |
-| **`Ctrl + S`** | **Save File** — Simpan perubahan file |
-
----
-
-### 4. 🔍 Pencarian, Find & Replace, dan Navigasi Cepat
-
+### 1b. 📑 Navigasi Tab Halaman File (*Bufferline*)
 | Shortcut | Fungsi |
 | :--- | :--- |
-| **`Ctrl + P`** | **Quick Open File** — Cari & buka file apa saja di project dengan cepat |
-| **`Ctrl + F`** | **Find in File** — Cari kata/teks di dalam file yang sedang dibuka |
-| **`Ctrl + R`** | **Find & Replace in File** — Cari kata dan ganti dengan teks baru secara interaktif di file aktif |
-| **`Alt + F`** atau **`F3`** | **Find in Project (Live Grep)** — Cari kata/teks di seluruh file dalam folder project |
-| **`Alt + O`** | **Recent Files** — Buka daftar riwayat file yang terakhir kali diedit |
-| **`F1`** | **Command Palette & Shortcut List** — Cari semua daftar perintah dan shortcut keyboard |
+| **`Alt + Right`** / **`Alt + Left`** | **Pindah ke Tab File Berikutnya / Sebelumnya** *(aktif di Normal & Insert mode)* |
+| **`Ctrl + PageDown`** / **`Ctrl + PageUp`** | **Tab File Berikutnya / Sebelumnya** *(standar VS Code)* |
+| **`Ctrl + Tab`** / **`Ctrl + Shift + Tab`** | **Tab File Berikutnya / Sebelumnya** *(di terminal yang mendukung)* |
+| **`Tab`** / **`Shift + Tab`** | **Tab File Berikutnya / Sebelumnya** *(Normal mode)* |
+| **`Alt + 1`** – **`Alt + 9`** | **Lompat Langsung ke Tab #1 s/d #9** |
+| **`Alt + P`** | **Pin / Unpin Tab Aktif** |
+| **`Alt + X`** / **`Alt + W`** / **`F4`** | **Tutup Tab Code Aktif** tanpa menutup Sidebar *(di dalam terminal, `Alt + X` menutup terminal aktif)* |
 
----
+### 2.  Multi-Terminal PowerShell
+| Shortcut / Tombol | Fungsi |
+| :--- | :--- |
+| **`Ctrl + T`** / **`Ctrl + \`** / **`F7`** | **Buka / Sembunyikan Panel Terminal Bawah** |
+| **`Alt + =`** / **`Ctrl + Shift + T`** | **➕ Tambah Terminal Baru** (`PowerShell #2`, `#3`, dst.) |
+| **`Alt + ]`** / **`Alt + [`** | **Pindah ke Tab Terminal Berikutnya / Sebelumnya** |
+| **`Alt + \`** | **Split Terminal Kanan-Kiri** di panel bawah |
+| **`Alt + X`** | **Hapus / Matikan Terminal Aktif** |
+| **`Alt + T`** | **Buka / Tutup Floating Terminal** |
 
-### 5. 📁 Sidebar, 📑 Tab Atas & 🪟 Split Window
-
+### 3. ✏️ Editing & Undo/Redo (Standar VS Code)
 | Shortcut | Fungsi |
 | :--- | :--- |
-| **`Ctrl + B`** | **Buka / Tutup Sidebar Kiri** (` Files` / ` Git` / `󰓩 Tabs`) |
-| **`Alt + E`** | **Fokus Kursor ke Sidebar Kiri** |
-| **`<`** dan **`>`** *(di dalam Sidebar)* | Pindah antar tab **`[  Files |  Git | 󰓩 Tabs ]`** di bagian atas Sidebar |
-| **`Tab`** / **`Shift + Tab`** *(Mode Normal)* | Pindah ke Tab Berikutnya / Sebelumnya di baris tab atas |
-| **`Alt + 1`** s/d **`Alt + 9`** | Lompat langsung ke Tab nomor `1` sampai `9` |
-| **`Alt + W`** atau **`F4`** | **Tutup Tab Aktif** (Sidebar kiri tetap terbuka rapi) |
-| **`Alt + P`** | **Pin / Unpin Tab Aktif** di sebelah kiri |
-| **`Alt + \`** *(di Editor)* | **Split Editor Kanan-Kiri** (*Vertical Split*) |
-| **`Alt + -`** | **Split Editor Atas-Bawah** (*Horizontal Split*) |
-| **`Alt + Q`** | Tutup Split Window yang sedang aktif |
-| **`Ctrl + ← / ↓ / ↑ / →`** | Pindah fokus kursor antar-window (Sidebar Kiri / Editor Kanan / Terminal Bawah) |
-| **`Ctrl + Q`** | **Keluar dari Neovim** |
+| **`Ctrl + Z`** / **`Ctrl + Y`** | **Undo** / **Redo** |
+| **`Ctrl + D`** / **`Shift + Alt + Down/Up`** | **Duplikat Baris / Teks** ke bawah atau ke atas |
+| **`Alt + Down/Up`** | **Geser Baris (Move Line)** ke bawah / ke atas |
+| **`Ctrl + C`** / **`Ctrl + X`** / **`Ctrl + V`** | **Copy** / **Cut** / **Paste** |
+| **`Ctrl + /`** | **Toggle Comment** (Beri / hapus komentar baris atau blok) |
+| **`Ctrl + S`** | **Simpan File (Save)** |
+| **`F5`** | **Run Code** (Jalankan file aktif `.html`, `.js`, `.py`, `.lua`, dll.) |
+| **`F6`** | **Ganti Tema Warna** (*TokyoNight* ⇄ *VS Code Dark+* ⇄ *Catppuccin*) |
 
 ---
 
-### 6. 🌿 Halaman Git, 🚀 Code Runner & 🎨 Tema Warna
+<a id="-english"></a>
+---
 
-| Shortcut / Command | Fungsi |
+# 🇬🇧 English
+
+Official documentation for the **Neovim v0.11.5 (100% Modular Lua)** configuration, designed to provide a modern interface, **Multi-Terminal management**, and **100% standard Visual Studio Code keyboard shortcuts** — **without requiring any `<Space>` key combinations**.
+
+---
+
+## 📸 Screenshots Gallery
+
+Here is a preview of the Neovim VS Code Edition interface in action:
+
+### 1. Welcome Dashboard (*Grouped Menu & Bilingual ID / EN*)
+> *Categorized welcome screen with Indonesian / English language selector (`Alt + L`) and Project Picker (`Ctrl + Shift + O`).*
+
+![Dashboard Neovim](./screenshots/dashboard.png)
+
+### 2. Main Editor, Sidebar & Winbar Tab (VS Code Style)
+> *Showing the Neo-tree sidebar on the left, Bufferline file tabs on top, code editor with FiraCode Nerd Font, interactive Winbar, and bottom statusline.*
+
+![Editor & Winbar View](./screenshots/editor-winbar.png)
+
+### 3. Floating Input Modal for Creating Files & Folders
+> *The floating input box centered on the screen when pressing `Ctrl + N` (New File) or `Alt + N` (New Folder).*
+
+![Floating Input Modal](./screenshots/floating-input.png)
+
+### 4. Multi-Terminal Manager & Split Terminal
+> *The bottom terminal panel supporting multiple PowerShell tabs (`PowerShell #1`, `#2`, `#3`), Split Terminals, and interactive control buttons.*
+
+![Multi-Terminal Manager](./screenshots/multi-terminal.png)
+
+---
+
+## 🌟 Key Features
+
+1. **󰛖 FiraCode Nerd Font & Rich Icons**:
+   - Powered by **FiraCode Nerd Font** with ligatures enabled across Windows Terminal, VS Code Terminal, and Neovim.
+   - Includes 3 icon packages (`nvim-web-devicons`, `mini.icons`, `lspkind.nvim`) for file types, folders, and autocomplete.
+2. **📄 Create Files & Folders via Floating Modal**:
+   - Elegant centered input dialog (`Ctrl + N` for files, `Alt + N` for directories). Automatically creates parent folders when suffixed with `/`.
+3. ** Multi-Terminal Manager**:
+   - Add multiple terminal tabs (`Alt +=`), split terminals side-by-side (`Alt + \`), and switch tabs (`Alt + ]` / `Alt + [`).
+4. **⌨️ 100% VS Code Standard Shortcuts**:
+   - All editing and navigation rely on `Ctrl`, `Alt`, and `F1–F12` without needing `<Space>` prefixes.
+ 5. **🌐 Language Menu (Dashboard)**:
+   - The dashboard is grouped by category (File, Search/Terminal, Git, Preferences) with aligned shortcuts.
+   - Choose **Bahasa Indonesia** or **English** from the `󰖟` dashboard button, `Alt + L`, or the `:Lang` command (`:LangID` / `:LangEN`).
+   - Your choice is saved automatically and instantly updates the dashboard text and the language badge in the status bar.
+ 6. **󰉋 Open Project / Directory**:
+   - Press the `󰉋` dashboard button, `Ctrl + Shift + O`, or `:OpenProject` to search for a project folder.
+   - Searching uses Telescope (recent projects appear first); press `Enter` to enter the folder.
+   - Neovim changes `cwd` to that folder, closes the dashboard, and the Neo-tree sidebar immediately shows the project contents.
+   - Widest default roots: **all drives** (`C:\`, `D:\`, ...) + `~` + cwd, so folders like `C:\laragon\www` or your college files are searchable.
+   - Customize with `vim.g.nvim_project_roots = { "D:/project", "C:/work" }` and depth `vim.g.nvim_project_depth = 3` (default).
+ 7. **🧩 VS Code Extensions → Neovim Plugins**:
+    - **Auto Rename Tag / Auto Close Tag** (`nvim-ts-autotag`) — rename HTML/PHP/JSX/Vue/Svelte tags in both opening & closing pairs.
+    - **Color Highlight** (`nvim-colorizer`) — hex/rgb/hsl/named colors and Tailwind classes preview inline.
+    - **Better Comments** (`todo-comments`) — highlight `TODO`, `FIXME`, `WARN`, `HACK`, `NOTE`; list them with `Alt + C`.
+    - **Error Lens** (`trouble`) — LSP error panel `Alt + M` (all: `Alt + Shift + M`) plus inline diagnostics.
+    - **WakaTime** & **Discord Rich Presence** — using your existing `~/.wakatime.cfg`.
+    - **Automatic LSP servers** (Intelephense, Tailwind, TS, HTML/CSS/JSON, ESLint, Vue, Svelte, Prisma, Go, Python, C/C++, Java, Kotlin, Bash, YAML, Docker, CMake) — installed via Mason; check with `:Mason`.
+
+---
+
+## 🚀 How to Open Neovim in Your Project
+
+Open your terminal inside your project directory and type:
+```powershell
+nvim .
+```
+*(or call directly from `C:\_neovim`)*:
+```powershell
+C:\_neovim\nvim.cmd .
+```
+> **Note**: If Neovim is already running, exit first (`Ctrl + Q` or `:qa!`) and reopen with `nvim .` to load all updated modules.
+
+---
+
+## ⌨️ Keyboard Shortcuts Reference (VS Code Style)
+
+### 1. 📄 New File & 📁 New Folder
+| Shortcut / Button | Description |
 | :--- | :--- |
-| **`Alt + G`** atau **`F9`** | Buka **Halaman Git Source Control (`Neogit`)** (`s` = Stage, `u` = Unstage, `cc` = Commit, `P` = Push, `p` = Pull, `q` = Tutup) |
-| **`F10`** atau **`:GitDiff`** | Buka **Halaman Git Diff Side-by-Side (`Diffview`)** — Perbandingan kode kiri vs kanan ala VS Code |
-| **`Alt + H`** atau **`F11`** | Buka **Halaman Riwayat Commit Git (`Git Log History`)** |
-| **`Alt + S`** | Buka tab **Git Status** di Sidebar Kiri |
-| **`F5`** *(atau klik `[ Run (F5)]`)* | **Run Code** — Jalankan file aktif (`.html` langsung buka di Browser, `.js` dengan Node.js, `.py` dengan Python, `.lua`, `.c`/`.cpp` dengan GCC) |
-| **`F6`** | **Ganti Tema Warna** secara bergantian (*TokyoNight Night* → *VS Code Dark+* → *Catppuccin Mocha*) |
-| **`F12`** / **`Shift + F12`** | **Go to Definition** / **Show References** (LSP) |
-| **`:LicenseInfo`** *(atau tekan `l` di Dashboard)* | **Tampilkan Sertifikat Lisensi Eksklusif Muhammad Bintang** |
-| **`:Tohtml`** | **Ekspor Kode Berwarna di Editor menjadi File HTML** |
+| **`Ctrl + N`** *(or click `[+󰈔 New File]`)* | **Create New File** — Opens a centered floating input box. Type file name, press **`Enter`**. |
+| **`Alt + N`** / **`Ctrl + Shift + N`** *(or click `[+ New Folder]`)* | **Create New Directory / Folder** — Opens a centered input box, type folder name, press **`Enter`**. |
+| **`F2`** | **Rename** active file or selected item in Sidebar. |
+| **`Alt + Delete`** | **Delete Active File** with safe confirmation prompt (`y`). |
+| **`Ctrl + Shift + O`** *(or click `[󰉋 Open Project]`)* | **Open Project / Directory** — Search folders with Telescope, press `Enter` to enter the folder. |
+| **`Alt + L`** | **Choose Language** — Open the Bahasa Indonesia / English menu. |
+
+> **Note:** Navigation shortcuts (`Alt + Left/Right`, `Alt + 1`–`Alt + 9`, `Alt + X`, `Ctrl + B`, `Alt + E`, `Alt + S`, `Ctrl + Shift + O`) also work **while typing** (insert mode). Clicking a file in the sidebar automatically enters normal mode, and clicking back into the terminal automatically enters typing mode. (`Tab` is still reserved for autocomplete while typing.) `ripgrep` for search is bundled at `C:\_neovim\bin\rg.exe` and added to Neovim's PATH automatically.
+
+### 1b. 📑 File Tab Navigation (*Bufferline*)
+| Shortcut | Description |
+| :--- | :--- |
+| **`Alt + Right`** / **`Alt + Left`** | **Next / Previous File Tab** *(works in Normal & Insert mode)* |
+| **`Ctrl + PageDown`** / **`Ctrl + PageUp`** | **Next / Previous File Tab** *(VS Code standard)* |
+| **`Ctrl + Tab`** / **`Ctrl + Shift + Tab`** | **Next / Previous File Tab** *(in supporting terminals)* |
+| **`Tab`** / **`Shift + Tab`** | **Next / Previous File Tab** *(Normal mode)* |
+| **`Alt + 1`** – **`Alt + 9`** | **Jump Directly to Tab #1–#9** |
+| **`Alt + P`** | **Pin / Unpin Active Tab** |
+| **`Alt + X`** / **`Alt + W`** / **`F4`** | **Close Active Code Tab** without closing Sidebar *(inside terminal, `Alt + X` kills active terminal)* |
+
+### 2.  Multi-Terminal PowerShell
+| Shortcut / Button | Description |
+| :--- | :--- |
+| **`Ctrl + T`** / **`Ctrl + \`** / **`F7`** | **Toggle Bottom Terminal Panel** |
+| **`Alt + =`** / **`Ctrl + Shift + T`** | **➕ Add New Terminal** (`PowerShell #2`, `#3`, etc.) |
+| **`Alt + ]`** / **`Alt + [`** | **Switch to Next / Previous Terminal Tab** |
+| **`Alt + \`** | **Split Terminal Side-by-Side** in the bottom panel |
+| **`Alt + X`** | **Kill / Close Active Terminal** |
+| **`Alt + T`** | **Toggle Floating Terminal** |
+
+### 3. ✏️ Editing & Undo/Redo (VS Code Standard)
+| Shortcut | Description |
+| :--- | :--- |
+| **`Ctrl + Z`** / **`Ctrl + Y`** | **Undo** / **Redo** |
+| **`Ctrl + D`** / **`Shift + Alt + Down/Up`** | **Duplicate Line / Selection** down or up |
+| **`Alt + Down/Up`** | **Move Line** down or up |
+| **`Ctrl + C`** / **`Ctrl + X`** / **`Ctrl + V`** | **Copy** / **Cut** / **Paste** |
+| **`Ctrl + /`** | **Toggle Comment** (Line or visual block) |
+| **`Ctrl + S`** | **Save File** |
+| **`F5`** | **Run Code** (Executes active file `.html`, `.js`, `.py`, `.lua`, etc.) |
+| **`F6`** | **Cycle Color Themes** (*TokyoNight* ⇄ *VS Code Dark+* ⇄ *Catppuccin*) |
 
 ---
 
-## 🛡️ Lisensi & Hak Cipta Eksklusif (`All Rights Reserved`)
+## 🛡️ License & Exclusive Copyright (`All Rights Reserved`)
 
 **Copyright © 2026 Muhammad Bintang. All Rights Reserved.**
 
-Berbeda dengan lisensi *open-source* (seperti MIT atau GPL), seluruh kode sumber dan konfigurasi di dalam `C:\_neovim` dilindungi oleh **Lisensi Hak Cipta Eksklusif / Tertutup (*Proprietary License — All Rights Reserved*)** berdasarkan **UU Hak Cipta RI No. 28 Tahun 2014** serta dilengkapi **Sistem Pengunci Perangkat (`lua/core/license.lua`)**:
+This software, configuration, and documentation are protected by a **Strict Proprietary License** and hardware-bound license verification system (`lua/core/license.lua`). 
 
-1. **Dilarang Menggunakan Tanpa Izin**: Pihak mana pun selain **Muhammad Bintang** dilarang keras menggunakan, menyalin, memodifikasi, atau mendistribusikan konfigurasi ini.
-2. **Proteksi Kunci Perangkat Otomatis (`lua/core/license.lua`)**:
-   - Konfigurasi ini terkunci secara otomatis pada identitas akun/perangkat milik **Muhammad Bintang (`MUH BINTANG @ LENOVO`)**.
-   - Apabila folder konfigurasi ini disalin ke perangkat orang lain, Neovim akan **otomatis memblokir akses editor** dan menampilkan layar peringatan pelanggaran lisensi (`⛔ AKSES DITOLAK — LISENSI EKSKLUSIF MILIK MUHAMMAD BINTANG`).
-   - Ketik **`:LicenseInfo`** di dalam Neovim (atau tekan **`l`** di halaman Dashboard) untuk menampilkan **Sertifikat Digital Lisensi Eksklusif**.
-3. Lihat dokumen hukum selengkapnya di file **[`LICENSE`](./LICENSE)**.
+1. **Unauthorized Use Prohibited**: Any unauthorized use, copying, modification, or distribution by third parties is strictly prohibited.
+2. **Hardware Protection**: The system automatically verifies hardware identity and blocks unauthorized execution on foreign machines.
+3. For full legal terms, please refer to the **[`LICENSE`](./LICENSE)** file.
