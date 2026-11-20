@@ -133,3 +133,20 @@ C:\_neovim\nvim.cmd .
 | **`F5`** *(atau klik `[ Run (F5)]`)* | **Run Code** — Jalankan file aktif (`.html` langsung buka di Browser, `.js` dengan Node.js, `.py` dengan Python, `.lua`, `.c`/`.cpp` dengan GCC) |
 | **`F6`** | **Ganti Tema Warna** secara bergantian (*TokyoNight Night* → *VS Code Dark+* → *Catppuccin Mocha*) |
 | **`F12`** / **`Shift + F12`** | **Go to Definition** / **Show References** (LSP) |
+| **`:LicenseInfo`** *(atau tekan `l` di Dashboard)* | **Tampilkan Sertifikat Lisensi Eksklusif Muhammad Bintang** |
+| **`:Tohtml`** | **Ekspor Kode Berwarna di Editor menjadi File HTML** |
+
+---
+
+## 🛡️ Lisensi & Hak Cipta Eksklusif (`All Rights Reserved`)
+
+**Copyright © 2026 Muhammad Bintang. All Rights Reserved.**
+
+Berbeda dengan lisensi *open-source* (seperti MIT atau GPL), seluruh kode sumber dan konfigurasi di dalam `C:\_neovim` dilindungi oleh **Lisensi Hak Cipta Eksklusif / Tertutup (*Proprietary License — All Rights Reserved*)** berdasarkan **UU Hak Cipta RI No. 28 Tahun 2014** serta dilengkapi **Sistem Pengunci Perangkat (`lua/core/license.lua`)**:
+
+1. **Dilarang Menggunakan Tanpa Izin**: Pihak mana pun selain **Muhammad Bintang** dilarang keras menggunakan, menyalin, memodifikasi, atau mendistribusikan konfigurasi ini.
+2. **Proteksi Kunci Perangkat Otomatis (`lua/core/license.lua`)**:
+   - Konfigurasi ini terkunci secara otomatis pada identitas akun/perangkat milik **Muhammad Bintang (`MUH BINTANG @ LENOVO`)**.
+   - Apabila folder konfigurasi ini disalin ke perangkat orang lain, Neovim akan **otomatis memblokir akses editor** dan menampilkan layar peringatan pelanggaran lisensi (`⛔ AKSES DITOLAK — LISENSI EKSKLUSIF MILIK MUHAMMAD BINTANG`).
+   - Ketik **`:LicenseInfo`** di dalam Neovim (atau tekan **`l`** di halaman Dashboard) untuk menampilkan **Sertifikat Digital Lisensi Eksklusif**.
+3. Lihat dokumen hukum selengkapnya di file **[`LICENSE`](./LICENSE)**.

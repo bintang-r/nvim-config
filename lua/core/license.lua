@@ -44,47 +44,51 @@ end
 function M.lock_unauthorized_device()
   local user, host = M.get_device_identity()
 
-  vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
-      vim.cmd("silent! only")
-      local buf = vim.api.nvim_create_buf(false, true)
-      vim.api.nvim_set_current_buf(buf)
+  local function show_lock_screen()
+    vim.cmd("silent! only")
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_set_current_buf(buf)
 
-      local lines = {
-        "",
-        "  ╔══════════════════════════════════════════════════════════════════════════╗",
-        "  ║       ⛔ AKSES DITOLAK — LISENSI EKSKLUSIF MILIK MUHAMMAD BINTANG        ║",
-        "  ║          UNAUTHORIZED USE PROHIBITED — ALL RIGHTS RESERVED               ║",
-        "  ╠══════════════════════════════════════════════════════════════════════════╣",
-        "  ║                                                                          ║",
-        "  ║  Konfigurasi Neovim (VS Code Edition) ini dilindungi oleh Hak Cipta      ║",
-        "  ║  dan Lisensi Tertutup (Proprietary License — All Rights Reserved).       ║",
-        "  ║                                                                          ║",
-        "  ║  • Pemegang Hak Cipta : MUHAMMAD BINTANG                                 ║",
-        "  ║  • ID Lisensi         : " .. M.info.license_id .. "                          ║",
-        "  ║  • Status Perangkat   : TIDAK TERDAFTAR / TIDAK SAH                      ║",
-        string.format("  ║  • Perangkat Terdeteksi: %-47s ║", user .. " @ " .. host),
-        "  ║                                                                          ║",
-        "  ║  Pihak mana pun selain Muhammad Bintang DILARANG KERAS menggunakan,      ║",
-        "  ║  menyalin, memodifikasi, atau mendistribusikan konfigurasi ini.          ║",
-        "  ║                                                                          ║",
-        "  ║  Tekan [Enter], [q], atau [Esc] untuk keluar dari Neovim.                ║",
-        "  ╚══════════════════════════════════════════════════════════════════════════╝",
-        "",
-      }
+    local lines = {
+      "",
+      "  ╔══════════════════════════════════════════════════════════════════════════╗",
+      "  ║       ⛔ AKSES DITOLAK — LISENSI EKSKLUSIF MILIK MUHAMMAD BINTANG        ║",
+      "  ║          UNAUTHORIZED USE PROHIBITED — ALL RIGHTS RESERVED               ║",
+      "  ╠══════════════════════════════════════════════════════════════════════════╣",
+      "  ║                                                                          ║",
+      "  ║  Konfigurasi Neovim (VS Code Edition) ini dilindungi oleh Hak Cipta      ║",
+      "  ║  dan Lisensi Tertutup (Proprietary License — All Rights Reserved).       ║",
+      "  ║                                                                          ║",
+      "  ║  • Pemegang Hak Cipta : MUHAMMAD BINTANG                                 ║",
+      "  ║  • ID Lisensi         : " .. M.info.license_id .. "                          ║",
+      "  ║  • Status Perangkat   : TIDAK TERDAFTAR / TIDAK SAH                      ║",
+      string.format("  ║  • Perangkat Terdeteksi: %-47s ║", user .. " @ " .. host),
+      "  ║                                                                          ║",
+      "  ║  Pihak mana pun selain Muhammad Bintang DILARANG KERAS menggunakan,      ║",
+      "  ║  menyalin, memodifikasi, atau mendistribusikan konfigurasi ini.          ║",
+      "  ║                                                                          ║",
+      "  ║  Tekan [Enter], [q], atau [Esc] untuk keluar dari Neovim.                ║",
+      "  ╚══════════════════════════════════════════════════════════════════════════╝",
+      "",
+    }
 
-      vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-      vim.bo[buf].modifiable = false
-      vim.bo[buf].readonly = true
-      vim.bo[buf].buftype = "nofile"
-      vim.wo.number = false
-      vim.wo.relativenumber = false
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+    vim.bo[buf].modifiable = false
+    vim.bo[buf].readonly = true
+    vim.bo[buf].buftype = "nofile"
+    vim.wo.number = false
+    vim.wo.relativenumber = false
 
-      local quit_keys = { "<CR>", "q", "<Esc>", "<C-c>", "<C-q>", "i", "a", ":" }
-      for _, k in ipairs(quit_keys) do
-        vim.keymap.set({ "n", "v" }, k, "<cmd>qa!<CR>", { buffer = buf, silent = true, noremap = true })
-      end
-    end,
+    local quit_keys = { "<CR>", "q", "<Esc>", "<C-c>", "<C-q>", "i", "a", ":" }
+    for _, k in ipairs(quit_keys) do
+      vim.keymap.set({ "n", "v" }, k, "<cmd>qa!<CR>", { buffer = buf, silent = true, noremap = true })
+    end
+  end
+
+  show_lock_screen()
+  vim.api.nvim_create_autocmd({ "VimEnter", "BufEnter" }, {
+    once = true,
+    callback = show_lock_screen,
   })
 end
 

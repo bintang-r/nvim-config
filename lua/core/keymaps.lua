@@ -9,7 +9,24 @@ local opts = { noremap = true, silent = true }
 
 -- Keluar dari Insert Mode dengan cepat menggunakan 'jk' atau 'Esc'
 keymap("i", "jk", "<ESC>", { desc = "Keluar ke Normal Mode" })
-keymap("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Bersihkan Highlight Pencarian" })
+keymap("n", "<Esc>", function()
+  vim.cmd("nohlsearch")
+  pcall(vim.lsp.buf.clear_references)
+end, { desc = "Bersihkan Highlight Pencarian & Referensi LSP" })
+
+-- Lompati karakter '>' secara otomatis di Insert Mode jika sudah ada '>' di sebelah kanan kursor (ala VS Code HTML)
+keymap("i", ">", function()
+  local col = vim.api.nvim_win_get_cursor(0)[2]
+  local line = vim.api.nvim_get_current_line()
+  if line:sub(col + 1, col + 1) == ">" then
+    return "<Right>"
+  end
+  return ">"
+end, { expr = true, replace_keycodes = true, desc = "Lompati > otomatis jika sudah ada" })
+
+-- Navigasi baris panjang yang terlipat (wrapped lines) tetap mulus per baris visual
+keymap("n", "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true, silent = true })
+keymap("n", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true, silent = true })
 
 -- ============================================================================
 -- 1. UNDO, REDO, SAVE, SELECT ALL (Ctrl+Z, Ctrl+Y, Ctrl+S, Ctrl+A)

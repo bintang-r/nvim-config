@@ -225,13 +225,14 @@ return {
         dashboard.button("h", "  Halaman Riwayat Commit Git (Git Log)         [Alt+H / F11]", "<cmd>DiffviewFileHistory<CR>"),
         dashboard.button("w", "󰊄  Cari Teks di Seluruh Project (Live Grep)     [Alt+F / F3]", "<cmd>Telescope live_grep<CR>"),
         dashboard.button("c", "  Ganti Tema Warna (TokyoNight / VS Code)      [F6]", "<cmd>lua require('custom').cycle_theme()<CR>"),
+        dashboard.button("l", "🛡️  Sertifikat Lisensi Eksklusif (Muh. Bintang)  [:LicenseInfo]", "<cmd>LicenseInfo<CR>"),
         dashboard.button("k", "  Daftar Semua Shortcut Keyboard               [F1]", "<cmd>Telescope keymaps<CR>"),
         dashboard.button("q", "󰈆  Keluar dari Neovim                           [Ctrl+Q]", "<cmd>confirm qa<CR>"),
       }
 
       local v = vim.version()
       dashboard.section.footer.val = string.format(
-        "Neovim v%d.%d.%d  •  Ctrl+N: File Baru  •  Alt+N: Folder Baru  •  Ctrl+Z: Undo  •  Ctrl+D: Duplikat  •  Ctrl+T: Terminal",
+        "🔒 Licensed Exclusively to: MUHAMMAD BINTANG (All Rights Reserved)  •  Neovim v%d.%d.%d",
         v.major,
         v.minor,
         v.patch

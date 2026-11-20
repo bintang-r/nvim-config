@@ -119,6 +119,23 @@ return {
             ["d"] = "delete",
             ["c"] = "copy",
             ["m"] = "move",
+            -- Fitur Baru: Copy Path ke Clipboard (Ctrl+C) & Buka di Aplikasi Windows/Explorer (o)
+            ["<C-c>"] = function(state)
+              local node = state.tree:get_node()
+              if node then
+                local path = node:get_id()
+                vim.fn.setreg("+", path)
+                vim.notify("📋 Path disalin ke Clipboard: " .. path, vim.log.levels.INFO)
+              end
+            end,
+            ["o"] = function(state)
+              local node = state.tree:get_node()
+              if node then
+                local path = node:get_id()
+                vim.fn.jobstart(string.format('cmd /c start "" "%s"', path), { detach = true })
+                vim.notify("🪟 Membuka di Windows: " .. vim.fn.fnamemodify(path, ":t"), vim.log.levels.INFO)
+              end
+            end,
             ["q"] = "close_window",
             ["R"] = "refresh",
             ["?"] = "show_help",
