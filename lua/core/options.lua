@@ -47,9 +47,32 @@ opt.backup = false
 opt.updatetime = 200          -- Respons cepat untuk CursorHold & GitSigns
 opt.timeoutlen = 300          -- Waktu tunggu kombinasi tombol (Which-Key)
 
--- Perilaku Split Window
+-- Perilaku Split Window & Navigasi Kursor Ala VS Code
 opt.splitright = true         -- Vertical split baru muncul di sebelah kanan
 opt.splitbelow = true         -- Horizontal split baru (termasuk Terminal) muncul di bawah
+opt.splitkeep = "screen"      -- Jaga layar kode tetap stabil (tidak loncat) saat buka/tutup terminal
+opt.jumpoptions = "view"      -- Pertahankan posisi visual layar saat berpindah file/baris
+opt.whichwrap:append("<>[]hl") -- Panah Kiri/Kanan otomatis lanjut pindah ke baris atas/bawah di ujung teks
+
+-- Matikan provider eksternal yang tidak diperlukan agar startup makin cepat
+vim.g.loaded_node_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+
+-- Smart Undofile: Nonaktifkan undofile otomatis jika membuka file raksasa (> 100 MB) agar tidak lag
+vim.api.nvim_create_autocmd("BufReadPre", {
+  group = vim.api.nvim_create_augroup("SmartUndofileLargeFile", { clear = true }),
+  callback = function()
+    local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(0))
+    if ok and stats and stats.size > 100 * 1024 * 1024 then
+      vim.bo.undofile = false
+      vim.notify("⚠️ File > 100MB: Undofile dinonaktifkan agar editor tetap cepat", vim.log.levels.WARN)
+    else
+      vim.bo.undofile = true
+    end
+  end,
+})
 
 -- Karakter Visual & Ikon Indikator
 opt.list = true

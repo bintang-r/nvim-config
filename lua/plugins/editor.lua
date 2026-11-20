@@ -94,9 +94,25 @@ return {
             ["s"] = "open_vsplit",
             ["S"] = "open_split",
             ["t"] = "open_tabnew",
-            -- Shortcut Buat File, Buat Directory, Rename & Hapus di dalam Sidebar:
-            ["a"] = { "add", config = { show_path = "relative" } },
-            ["A"] = "add_directory",
+            -- Shortcut Buat File & Buat Directory langsung dari Sidebar (Popup Modal Tengah):
+            ["<C-n>"] = function()
+              require("custom").create_new_file()
+            end,
+            ["<A-n>"] = function()
+              require("custom").create_new_directory()
+            end,
+            ["n"] = function()
+              require("custom").create_new_file()
+            end,
+            ["N"] = function()
+              require("custom").create_new_directory()
+            end,
+            ["a"] = function()
+              require("custom").create_new_file()
+            end,
+            ["A"] = function()
+              require("custom").create_new_directory()
+            end,
             ["<F2>"] = "rename",
             ["r"] = "rename",
             ["<Del>"] = "delete",
@@ -158,27 +174,20 @@ return {
     opts = {},
   },
 
-  -- 4. TOGGLETERM: Panel Terminal Bawah & Floating (Ctrl+T / Ctrl+\ / Alt+T / F7)
+  -- 4. TOGGLETERM: Mendukung Multi-Terminal
   {
     "akinsho/toggleterm.nvim",
     version = "*",
     lazy = false,
     config = function()
       require("toggleterm").setup({
-        size = function(term)
-          if term.direction == "horizontal" then
-            return 13
-          elseif term.direction == "vertical" then
-            return math.floor(vim.o.columns * 0.4)
-          end
-        end,
-        open_mapping = [[<c-\>]],
+        size = 13,
         hide_numbers = true,
         shade_terminals = true,
         shading_factor = 2,
         start_in_insert = true,
-        insert_mappings = true,
-        terminal_mappings = true,
+        insert_mappings = false,
+        terminal_mappings = false,
         persist_size = true,
         persist_mode = true,
         direction = "horizontal",
