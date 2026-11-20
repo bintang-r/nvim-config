@@ -167,11 +167,57 @@ keymap("n", "<C-x>", '"+dd', { desc = "✂️ Cut Baris Aktif (Ctrl+X)" })
 keymap("i", "<C-x>", '<C-o>"+dd', { desc = "✂️ Cut Baris Aktif (Ctrl+X)" })
 
 -- Paste (Ctrl + V): Tempel dari Clipboard Windows di Normal, Insert, dan Visual Mode
-keymap("n", "<C-v>", '"+p', { desc = "📥 Paste dari Clipboard (Ctrl+V)" })
+keymap("n", "<C-v>", function()
+  if not vim.bo.modifiable then
+    return ""
+  end
+  return '"+p'
+end, { expr = true, noremap = true, silent = true, desc = "📥 Paste dari Clipboard (Ctrl+V)" })
 keymap("i", "<C-v>", "<C-r>+", { desc = "📥 Paste dari Clipboard (Ctrl+V)" })
 keymap("v", "<C-v>", '"+p', { desc = "📥 Paste dari Clipboard (Ctrl+V)" })
 -- Visual Block Mode tetap bisa diakses lewat Alt + V
 keymap("n", "<A-v>", "<C-v>", { desc = "Visual Block Mode (Alt+V)" })
+
+-- Pengaman Terminal Bracketed Paste (Windows Terminal Ctrl+V) di buffer read-only / Sidebar Neo-tree
+-- Mencegah error E21 ('modifiable' is off) sekaligus meneruskan Ctrl+V di Neo-tree ke Paste File!
+if not vim.g._safe_paste_installed then
+  vim.g._safe_paste_installed = true
+  local orig_paste = vim.paste
+  vim.paste = function(lines, phase)
+    local mode = vim.api.nvim_get_mode().mode
+    -- Biarkan paste normal di Command-line (:) dan Terminal (PowerShell)
+    if mode:sub(1, 1) == "c" or mode:sub(1, 1) == "t" then
+      return orig_paste(lines, phase)
+    end
+
+    if vim.bo.filetype == "neo-tree" then
+      if phase == -1 or phase == 1 then
+        vim.schedule(function()
+          local ok_mgr, manager = pcall(require, "neo-tree.sources.manager")
+          local ok_cmd, fs_cmds = pcall(require, "neo-tree.sources.filesystem.commands")
+          if ok_mgr and ok_cmd then
+            local state = manager.get_state("filesystem")
+            if state and state.clipboard and next(state.clipboard) ~= nil then
+              fs_cmds.paste_from_clipboard(state)
+            else
+              vim.notify(
+                "💡 Di Sidebar: tekan 'y' (Copy) atau 'x' (Cut) pada file/folder dulu, lalu 'p' / 'Ctrl+V' untuk menempel.",
+                vim.log.levels.INFO
+              )
+            end
+          end
+        end)
+      end
+      return false
+    end
+
+    if not vim.bo.modifiable then
+      return false
+    end
+
+    return orig_paste(lines, phase)
+  end
+end
 
 -- ============================================================================
 -- 3. MOVE LINE UP / DOWN & DELETE LINE ALA VS CODE (Alt+Up/Down, Alt+K)
