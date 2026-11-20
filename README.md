@@ -114,7 +114,7 @@ C:\_neovim\nvim.cmd .
 | Aksi / Shortcut *(di Sidebar)* | Fungsi |
 | :--- | :--- |
 | **🖱️ Drag & Drop Mouse *(Internal)*** | **Tarik & Lepas File/Folder** di Sidebar ke folder tujuan untuk memindahkan file langsung *(tersedia notifikasi live saat menyeret)* |
-| **📥 Drag dari Windows Explorer** | **Tarik File/Folder dari Windows File Explorer** dan lepas ke folder yang sedang disorot di Sidebar → otomatis tersalin masuk ke folder tersebut *(aman dari overwrite: otomatis beri `(1)` jika nama sama)* |
+| **📥 Drag dari Windows Explorer** | **Tarik 1 atau Banyak File/Gambar/Folder sekaligus dari Windows File Explorer** dan lepas ke folder yang sedang disorot di Sidebar → semuanya otomatis tersalin masuk *(aman dari overwrite: otomatis beri `(1)` jika nama sama)* |
 | **`y`** / **`Alt + C`** / **`Ctrl + C`** | **Copy File/Folder** ke clipboard Explorer *(siap diduplikat; gunakan `y` atau `Alt + C` jika `Ctrl + C` dipakai Windows Terminal)* |
 | **`x`** / **`Alt + X`** / **`Ctrl + X`** | **Cut File/Folder** ke clipboard Explorer *(siap dipindahkan)* |
 | **`p`** / **`Alt + V`** / **`Ctrl + V`** | **Paste ke Folder Tujuan** — otomatis **duplikat** jika dari Copy, **pindah** jika dari Cut, **atau langsung paste file/folder hasil `Ctrl + C` dari Windows File Explorer!** |
@@ -265,7 +265,7 @@ C:\_neovim\nvim.cmd .
 | Action / Shortcut *(in Sidebar)* | Description |
 | :--- | :--- |
 | **🖱️ Mouse Drag & Drop *(Internal)*** | **Drag & Drop File/Folder** onto a target Sidebar folder to move it directly *(with live drag preview)* |
-| **📥 Drag from Windows Explorer** | **Drag File/Folder from Windows File Explorer** and drop onto the highlighted Sidebar folder → automatically copies it into that folder *(safe auto-rename `(1)` on collision)* |
+| **📥 Drag from Windows Explorer** | **Drag 1 or Multiple Files/Images/Folders at once from Windows File Explorer** and drop onto the highlighted Sidebar folder → all items are copied automatically *(safe auto-rename `(1)` on collision)* |
 | **`y`** / **`Alt + C`** / **`Ctrl + C`** | **Copy File/Folder** to Explorer clipboard *(ready to duplicate; use `y` or `Alt + C` if Windows Terminal intercepts `Ctrl + C`)* |
 | **`x`** / **`Alt + X`** / **`Ctrl + X`** | **Cut File/Folder** to Explorer clipboard *(ready to move)* |
 | **`p`** / **`Alt + V`** / **`Ctrl + V`** | **Paste into Target Folder** — automatically **duplicates** on Copy, **moves** on Cut, **or pastes files/folders copied with `Ctrl + C` from Windows File Explorer!** |

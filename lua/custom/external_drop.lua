@@ -74,11 +74,17 @@ function M.parse_dropped_paths(lines)
         for quoted in cleaned:gmatch("'([^']+)'") do
           add_if_exists(quoted)
         end
-        rest = rest:gsub('"[^"]+"', " "):gsub("'[^']+'", " ")
-        -- 3. Ekstrak path Windows tanpa spasi (mis. C:\foo\bar.png D:\baz.txt)
-        for token in rest:gmatch("%S+") do
-          if token:match("^[A-Za-z]:[/\\]") or token:match("^\\\\") then
-            add_if_exists(token)
+        rest = trim(rest:gsub('"[^"]+"', "\n"):gsub("'[^']+'", "\n"))
+
+        -- 3. Pisahkan beberapa path Windows tanpa kutip yang mungkin mengandung spasi
+        --    (contoh: C:\Users\MUH BINTANG\a.png C:\Users\MUH BINTANG\b.png)
+        if rest ~= "" then
+          -- Sisipkan newline tepat sebelum setiap drive letter baru (" C:\" atau " D:/") atau UNC (" \\")
+          local split_text = rest
+            :gsub("%s+([A-Za-z]:[/\\])", "\n%1")
+            :gsub("%s+(\\\\)", "\n%1")
+          for part in split_text:gmatch("[^\r\n]+") do
+            add_if_exists(part)
           end
         end
       end
@@ -274,8 +280,19 @@ function M.smart_paste_in_neotree(state, pasted_lines)
   -- Prioritas 1: File/folder yang di-drag langsung dari Windows Explorer ke Windows Terminal
   if pasted_lines and #pasted_lines > 0 then
     local dropped = M.parse_dropped_paths(pasted_lines)
-    if #dropped > 0 then
+    if #dropped > 1 then
       M.copy_external_paths_to_dir(dropped, target_dir)
+      return
+    elseif #dropped == 1 then
+      -- Jika hanya 1 path masuk lewat bracketed paste (mis. saat Ctrl+V banyak file di Windows Explorer),
+      -- cek juga Windows Clipboard FileDropList supaya SEMUA file yang dipilih ikut ter-paste!
+      M.get_windows_clipboard_files_async(function(win_files)
+        if #win_files > 1 then
+          M.copy_external_paths_to_dir(win_files, target_dir)
+        else
+          M.copy_external_paths_to_dir(dropped, target_dir)
+        end
+      end)
       return
     end
   end
