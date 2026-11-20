@@ -1,0 +1,107 @@
+-- ============================================================================
+-- CORE MODULE: VS Code Style Keymaps (lua/core/keymaps.lua)
+-- Semua Shortcut Menggunakan Standar VS Code (Ctrl / Alt / F1-F12)
+-- TANPA Perlu Kombinasi Tombol <Space>!
+-- ============================================================================
+
+local keymap = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
+-- Keluar dari Insert Mode dengan cepat menggunakan 'jk' atau 'Esc'
+keymap("i", "jk", "<ESC>", { desc = "Keluar ke Normal Mode" })
+keymap("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Bersihkan Highlight Pencarian" })
+
+-- ============================================================================
+-- 1. UNDO, REDO, SAVE, SELECT ALL (Ctrl+Z, Ctrl+Y, Ctrl+S, Ctrl+A)
+-- ============================================================================
+-- Undo (Ctrl + Z) di Normal, Insert, dan Visual Mode
+keymap("n", "<C-z>", "u", { desc = "↩️ Undo (Ctrl+Z)" })
+keymap("i", "<C-z>", "<C-o>u", { desc = "↩️ Undo (Ctrl+Z)" })
+keymap("v", "<C-z>", "<Esc>u", { desc = "↩️ Undo (Ctrl+Z)" })
+
+-- Redo (Ctrl + Y) di Normal, Insert, dan Visual Mode
+keymap("n", "<C-y>", "<C-r>", { desc = "↪️ Redo (Ctrl+Y)" })
+keymap("i", "<C-y>", "<C-o><C-r>", { desc = "↪️ Redo (Ctrl+Y)" })
+keymap("v", "<C-y>", "<Esc><C-r>", { desc = "↪️ Redo (Ctrl+Y)" })
+
+-- Save File (Ctrl + S) di semua mode
+keymap("n", "<C-s>", "<cmd>w<CR>", { desc = "💾 Simpan File (Ctrl+S)" })
+keymap("i", "<C-s>", "<Esc><cmd>w<CR>a", { desc = "💾 Simpan File (Ctrl+S)" })
+keymap("v", "<C-s>", "<Esc><cmd>w<CR>", { desc = "💾 Simpan File (Ctrl+S)" })
+
+-- Select All / Blok Semua (Ctrl + A) di semua mode
+keymap("n", "<C-a>", "ggVG", { desc = "🔲 Select All / Blok Semua (Ctrl+A)" })
+keymap("i", "<C-a>", "<Esc>ggVG", { desc = "🔲 Select All / Blok Semua (Ctrl+A)" })
+keymap("v", "<C-a>", "<Esc>ggVG", { desc = "🔲 Select All / Blok Semua (Ctrl+A)" })
+
+-- ============================================================================
+-- 2. COPY, CUT, PASTE ALA VS CODE (Ctrl+C, Ctrl+X, Ctrl+V)
+-- ============================================================================
+-- Copy (Ctrl + C): Jika diblok menyalin blok, jika tidak diblok menyalin 1 baris aktif
+keymap("v", "<C-c>", '"+y', { desc = "📋 Copy Teks yang Diblok (Ctrl+C)" })
+keymap("n", "<C-c>", '"+yy', { desc = "📋 Copy Baris Aktif (Ctrl+C)" })
+
+-- Cut (Ctrl + X): Jika diblok memotong blok, jika tidak diblok memotong 1 baris aktif
+keymap("v", "<C-x>", '"+d', { desc = "✂️ Cut Teks yang Diblok (Ctrl+X)" })
+keymap("n", "<C-x>", '"+dd', { desc = "✂️ Cut Baris Aktif (Ctrl+X)" })
+keymap("i", "<C-x>", '<C-o>"+dd', { desc = "✂️ Cut Baris Aktif (Ctrl+X)" })
+
+-- Paste (Ctrl + V): Tempel dari Clipboard Windows di Normal, Insert, dan Visual Mode
+keymap("n", "<C-v>", '"+p', { desc = "📥 Paste dari Clipboard (Ctrl+V)" })
+keymap("i", "<C-v>", "<C-r>+", { desc = "📥 Paste dari Clipboard (Ctrl+V)" })
+keymap("v", "<C-v>", '"+p', { desc = "📥 Paste dari Clipboard (Ctrl+V)" })
+-- Visual Block Mode tetap bisa diakses lewat Alt + V
+keymap("n", "<A-v>", "<C-v>", { desc = "Visual Block Mode (Alt+V)" })
+
+-- ============================================================================
+-- 3. MOVE LINE UP / DOWN & DELETE LINE ALA VS CODE (Alt+Up/Down, Alt+K)
+-- ============================================================================
+-- Geser Baris ke Bawah (Alt + Down atau Alt + J)
+keymap("n", "<A-Down>", "<cmd>m .+1<CR>==", { desc = "⬇️ Geser Baris ke Bawah (Alt+Down)" })
+keymap("i", "<A-Down>", "<Esc><cmd>m .+1<CR>==gi", { desc = "⬇️ Geser Baris ke Bawah (Alt+Down)" })
+keymap("v", "<A-Down>", ":m '>+1<CR>gv=gv", { desc = "⬇️ Geser Blok ke Bawah (Alt+Down)" })
+keymap("n", "<A-j>", "<cmd>m .+1<CR>==", { desc = "⬇️ Geser Baris ke Bawah (Alt+J)" })
+keymap("i", "<A-j>", "<Esc><cmd>m .+1<CR>==gi", { desc = "⬇️ Geser Baris ke Bawah (Alt+J)" })
+keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "⬇️ Geser Blok ke Bawah (Alt+J)" })
+
+-- Geser Baris ke Atas (Alt + Up atau Alt + K)
+keymap("n", "<A-Up>", "<cmd>m .-2<CR>==", { desc = "⬆️ Geser Baris ke Atas (Alt+Up)" })
+keymap("i", "<A-Up>", "<Esc><cmd>m .-2<CR>==gi", { desc = "⬆️ Geser Baris ke Atas (Alt+Up)" })
+keymap("v", "<A-Up>", ":m '<-2<CR>gv=gv", { desc = "⬆️ Geser Blok ke Atas (Alt+Up)" })
+keymap("n", "<A-k>", "<cmd>m .-2<CR>==", { desc = "⬆️ Geser Baris ke Atas (Alt+K)" })
+keymap("i", "<A-k>", "<Esc><cmd>m .-2<CR>==gi", { desc = "⬆️ Geser Baris ke Atas (Alt+K)" })
+keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "⬆️ Geser Blok ke Atas (Alt+K)" })
+
+-- Hapus Baris Instan (Alt + Backspace atau Ctrl + Shift + K)
+keymap("n", "<A-BS>", '"_dd', { desc = "🗑️ Hapus Baris Aktif (Alt+Backspace)" })
+keymap("i", "<A-BS>", '<C-o>"_dd', { desc = "🗑️ Hapus Baris Aktif (Alt+Backspace)" })
+
+-- Indentasi dengan Tab / Shift+Tab saat memblok teks (Visual Mode) seperti VS Code
+keymap("v", "<Tab>", ">gv", { desc = "Indent Kanan (Tab)" })
+keymap("v", "<S-Tab>", "<gv", { desc = "Indent Kiri (Shift+Tab)" })
+keymap("v", "<", "<gv", opts)
+keymap("v", ">", ">gv", opts)
+
+-- ============================================================================
+-- 4. NAVIGASI WINDOW, SPLIT EDITOR & KELUAR (Ctrl+Panah, Alt+\, Alt+-, Ctrl+Q)
+-- ============================================================================
+-- Pindah Fokus Kursor Antar Window (Sidebar / Editor / Terminal) dengan Ctrl + Panah
+keymap("n", "<C-Left>", "<C-w>h", { desc = "⬅️ Fokus ke Window/Sidebar Kiri" })
+keymap("n", "<C-Down>", "<C-w>j", { desc = "⬇️ Fokus ke Window/Terminal Bawah" })
+keymap("n", "<C-Up>", "<C-w>k", { desc = "⬆️ Fokus ke Window Atas" })
+keymap("n", "<C-Right>", "<C-w>l", { desc = "➡️ Fokus ke Window Editor Kanan" })
+
+-- Ubah Ukuran Window dengan Alt + Shift + Panah
+keymap("n", "<A-S-Up>", "<cmd>resize +2<CR>", opts)
+keymap("n", "<A-S-Down>", "<cmd>resize -2<CR>", opts)
+keymap("n", "<A-S-Left>", "<cmd>vertical resize -2<CR>", opts)
+keymap("n", "<A-S-Right>", "<cmd>vertical resize +2<CR>", opts)
+
+-- Split Layar Editor ala VS Code (Alt + \ untuk Kanan-Kiri, Alt + - untuk Atas-Bawah)
+keymap("n", "<A-\\>", "<C-w>v", { desc = "🪟 Split Editor Kanan-Kiri (Alt+\\)" })
+keymap("n", "<A-->", "<C-w>s", { desc = "🪟 Split Editor Atas-Bawah (Alt+-)" })
+keymap("n", "<A-=>", "<C-w>=", { desc = "🪟 Ratakan Ukuran Split (Alt+=)" })
+keymap("n", "<A-q>", "<cmd>close<CR>", { desc = "🪟 Tutup Split Window Aktif (Alt+Q)" })
+
+-- Keluar dari Neovim (Ctrl + Q)
+keymap({ "n", "i", "v" }, "<C-q>", "<cmd>confirm qa<CR>", { desc = "🚪 Keluar dari Neovim (Ctrl+Q)" })

@@ -1,0 +1,14 @@
+# Neovim portable distribution binaries, runtimes, and fonts
+/bin/
+/share/
+/fonts/
+*.exe
+*.dll
+*.zip
+*.tar.gz
+
+# Neovim cache/state
+/.nvim/
+/var/
+/state/
+Session.vim
