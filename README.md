@@ -48,23 +48,26 @@ Berikut adalah tampilan antarmuka Neovim VS Code Edition dalam aksi:
    - Tambah banyak tab terminal (`Alt +=`), Split Terminal berdampingan (`Alt + \`), dan pindah antar terminal (`Alt + ]` / `Alt + [`).
 4. **⌨️ 100% Shortcut Standar VS Code**:
    - Seluruh navigasi dan editing menggunakan `Ctrl`, `Alt`, dan `F1–F12` tanpa tombol `<Space>`.
- 5. **🌐 Menu Pilih Bahasa (Dashboard)**:
+5. **🌐 Menu Pilih Bahasa (Dashboard)**:
    - Dashboard tersusun rapi per kategori (File, Cari/Terminal, Git, Preferensi) dengan shortcut yang sejajar.
    - Pilih **Bahasa Indonesia** atau **English** lewat tombol `󰖟` di Dashboard, `Alt + L`, atau perintah `:Lang` (`:LangID` / `:LangEN`).
    - Pilihan tersimpan otomatis dan langsung memperbarui teks menu Dashboard serta badge bahasa di status bar.
- 6. **󰉋 Buka Project / Directory**:
+6. **󰉋 Buka Project / Directory**:
    - Tekan tombol `󰉋` di Dashboard, `Ctrl + Shift + O`, atau perintah `:OpenProject` untuk mencari folder project.
    - Pencarian memakai Telescope (project terakhir muncul lebih dulu), lalu `Enter` untuk masuk.
    - Neovim otomatis pindah `cwd` ke folder itu, Dashboard ditutup, dan Sidebar Neo-tree langsung menampilkan isi project tersebut.
    - Root awal paling luar: **semua drive** (`C:\`, `D:\`, ...) + `~` + cwd, jadi folder seperti `C:\laragon\www` atau file perkuliahan ikut kesearch.
    - Atur sendiri: `vim.g.nvim_project_roots = { "D:/project", "C:/work" }` dan kedalaman `vim.g.nvim_project_depth = 3` (default).
- 7. **🧩 Ekstensi VS Code → Plugin Neovim**:
-    - **Auto Rename Tag / Auto Close Tag** (`nvim-ts-autotag`) — ganti nama tag HTML/PHP/JSX/Vue/Svelte otomatis di pembuka & penutup.
-    - **Color Highlight** (`nvim-colorizer`) — warna hex/rgb/hsl/nama warna & kelas Tailwind tampil langsung di editor.
-    - **Better Comments** (`todo-comments`) — soroti `TODO`, `FIXME`, `WARN`, `HACK`, `NOTE`; daftarkan lewat `Alt + C`.
-    - **Error Lens** (`trouble`) — panel error LSP `Alt + M` (semua: `Alt + Shift + M`) + pesan inline di baris kursor.
-    - **WakaTime** & **Discord Rich Presence** —Memakai `~/.wakatime.cfg` yang sudah ada.
-    - **Server LSP otomatis** (Intelephense, Tailwind, TS, HTML/CSS/JSON, ESLint, Vue, Svelte, Prisma, Go, Python, C/C++, Java, Kotlin, Bash, YAML, Docker, CMake) — pasang otomatis lewat Mason; cek dengan `:Mason`.
+7. **🧩 Ekstensi VS Code → Plugin Neovim**:
+   - **Auto Rename Tag / Auto Close Tag** (`nvim-ts-autotag`) — ganti nama tag HTML/PHP/JSX/Vue/Svelte otomatis di pembuka & penutup.
+   - **Color Highlight** (`nvim-colorizer`) — warna hex/rgb/hsl/nama warna & kelas Tailwind tampil langsung di editor.
+   - **Better Comments** (`todo-comments`) — soroti `TODO`, `FIXME`, `WARN`, `HACK`, `NOTE`; daftarkan lewat `Alt + C`.
+   - **Error Lens** (`trouble`) — panel error LSP `Alt + M` (semua: `Alt + Shift + M`) + pesan inline di baris kursor.
+   - **WakaTime** & **Discord Rich Presence** — memakai `~/.wakatime.cfg` yang sudah ada.
+   - **Server LSP otomatis** (Intelephense, Tailwind, TS, HTML/CSS/JSON, ESLint, Vue, Svelte, Prisma, Go, Python, C/C++, Java, Kotlin, Bash, YAML, Docker, CMake) — pasang otomatis lewat Mason; cek dengan `:Mason`.
+8. **🔲 Select Code Presisi & 📦 Drag-and-Drop / Copy-Cut-Paste File Explorer**:
+   - **Seleksi kode ala VS Code**: `Shift + Panah`, `Ctrl + Shift + Left/Right`, `Shift + Home/End`, `Ctrl + L` (select baris), `Alt + D` (select kata), serta **Treesitter Smart Selection** (`Alt + A` perluas / `Alt + Z` perkecil blok kode).
+   - **Kelola file langsung di Sidebar Explorer**: dukung **🖱️ Mouse Drag & Drop** untuk memindahkan file/folder ke folder tujuan, serta **`Ctrl + C` / `y`** (Copy), **`Ctrl + X` / `x`** (Cut), dan **`Ctrl + V` / `p`** (Paste untuk duplikat atau pindah file).
 
 ---
 
@@ -195,23 +198,26 @@ Here is a preview of the Neovim VS Code Edition interface in action:
    - Add multiple terminal tabs (`Alt +=`), split terminals side-by-side (`Alt + \`), and switch tabs (`Alt + ]` / `Alt + [`).
 4. **⌨️ 100% VS Code Standard Shortcuts**:
    - All editing and navigation rely on `Ctrl`, `Alt`, and `F1–F12` without needing `<Space>` prefixes.
- 5. **🌐 Language Menu (Dashboard)**:
+5. **🌐 Language Menu (Dashboard)**:
    - The dashboard is grouped by category (File, Search/Terminal, Git, Preferences) with aligned shortcuts.
    - Choose **Bahasa Indonesia** or **English** from the `󰖟` dashboard button, `Alt + L`, or the `:Lang` command (`:LangID` / `:LangEN`).
    - Your choice is saved automatically and instantly updates the dashboard text and the language badge in the status bar.
- 6. **󰉋 Open Project / Directory**:
+6. **󰉋 Open Project / Directory**:
    - Press the `󰉋` dashboard button, `Ctrl + Shift + O`, or `:OpenProject` to search for a project folder.
    - Searching uses Telescope (recent projects appear first); press `Enter` to enter the folder.
    - Neovim changes `cwd` to that folder, closes the dashboard, and the Neo-tree sidebar immediately shows the project contents.
    - Widest default roots: **all drives** (`C:\`, `D:\`, ...) + `~` + cwd, so folders like `C:\laragon\www` or your college files are searchable.
    - Customize with `vim.g.nvim_project_roots = { "D:/project", "C:/work" }` and depth `vim.g.nvim_project_depth = 3` (default).
- 7. **🧩 VS Code Extensions → Neovim Plugins**:
-    - **Auto Rename Tag / Auto Close Tag** (`nvim-ts-autotag`) — rename HTML/PHP/JSX/Vue/Svelte tags in both opening & closing pairs.
-    - **Color Highlight** (`nvim-colorizer`) — hex/rgb/hsl/named colors and Tailwind classes preview inline.
-    - **Better Comments** (`todo-comments`) — highlight `TODO`, `FIXME`, `WARN`, `HACK`, `NOTE`; list them with `Alt + C`.
-    - **Error Lens** (`trouble`) — LSP error panel `Alt + M` (all: `Alt + Shift + M`) plus inline diagnostics.
-    - **WakaTime** & **Discord Rich Presence** — using your existing `~/.wakatime.cfg`.
-    - **Automatic LSP servers** (Intelephense, Tailwind, TS, HTML/CSS/JSON, ESLint, Vue, Svelte, Prisma, Go, Python, C/C++, Java, Kotlin, Bash, YAML, Docker, CMake) — installed via Mason; check with `:Mason`.
+7. **🧩 VS Code Extensions → Neovim Plugins**:
+   - **Auto Rename Tag / Auto Close Tag** (`nvim-ts-autotag`) — rename HTML/PHP/JSX/Vue/Svelte tags in both opening & closing pairs.
+   - **Color Highlight** (`nvim-colorizer`) — hex/rgb/hsl/named colors and Tailwind classes preview inline.
+   - **Better Comments** (`todo-comments`) — highlight `TODO`, `FIXME`, `WARN`, `HACK`, `NOTE`; list them with `Alt + C`.
+   - **Error Lens** (`trouble`) — LSP error panel `Alt + M` (all: `Alt + Shift + M`) plus inline diagnostics.
+   - **WakaTime** & **Discord Rich Presence** — using your existing `~/.wakatime.cfg`.
+   - **Automatic LSP servers** (Intelephense, Tailwind, TS, HTML/CSS/JSON, ESLint, Vue, Svelte, Prisma, Go, Python, C/C++, Java, Kotlin, Bash, YAML, Docker, CMake) — installed via Mason; check with `:Mason`.
+8. **🔲 Precise Code Selection & 📦 Drag-and-Drop / Copy-Cut-Paste File Explorer**:
+   - **VS Code-style code selection**: `Shift + Arrows`, `Ctrl + Shift + Left/Right`, `Shift + Home/End`, `Ctrl + L` (select line), `Alt + D` (select word), plus **Treesitter Smart Selection** (`Alt + A` expand / `Alt + Z` shrink code block).
+   - **Direct Sidebar Explorer file management**: supports **🖱️ Mouse Drag & Drop** to move files/folders into target folders, plus **`Ctrl + C` / `y`** (Copy), **`Ctrl + X` / `x`** (Cut), and **`Ctrl + V` / `p`** (Paste to duplicate or move).
 
 ---
 
