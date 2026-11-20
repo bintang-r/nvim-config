@@ -194,14 +194,21 @@ if not vim.g._safe_paste_installed then
       if phase == -1 or phase == 1 then
         vim.schedule(function()
           local ok_mgr, manager = pcall(require, "neo-tree.sources.manager")
-          local ok_cmd, fs_cmds = pcall(require, "neo-tree.sources.filesystem.commands")
-          if ok_mgr and ok_cmd then
+          if ok_mgr then
             local state = manager.get_state("filesystem")
             if state and state.clipboard and next(state.clipboard) ~= nil then
-              fs_cmds.paste_from_clipboard(state)
+              if state.resolved_mappings and state.resolved_mappings["p"] and state.resolved_mappings["p"].handler then
+                state.resolved_mappings["p"].handler()
+              else
+                local ok_cmd, fs_cmds = pcall(require, "neo-tree.sources.filesystem.commands")
+                if ok_cmd then
+                  state.config = state.config or {}
+                  fs_cmds.paste_from_clipboard(state)
+                end
+              end
             else
               vim.notify(
-                "💡 Di Sidebar: tekan 'y' (Copy) atau 'x' (Cut) pada file/folder dulu, lalu 'p' / 'Ctrl+V' untuk menempel.",
+                "💡 Di Sidebar: tekan 'y' / 'Alt+C' (Copy) atau 'x' / 'Alt+X' (Cut) pada file/folder dulu, lalu 'p' / 'Alt+V' / 'Ctrl+V' untuk Paste.",
                 vim.log.levels.INFO
               )
             end

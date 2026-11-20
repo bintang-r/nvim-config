@@ -75,12 +75,35 @@ return {
       end
 
       local function handle_drag_mouse_move(state)
+        local pos = vim.fn.getmousepos()
+        local cur_win = vim.api.nvim_get_current_win()
+
+        -- Jika drag dimulai langsung dari klik pertama (saat fokus berpindah dari editor ke Neo-tree),
+        -- otomatis jadikan baris kursor awal sebagai file/folder sumber!
         if not drag_state.active then
-          feed_mouse("<LeftDrag>")
-          return
+          if pos.winid == cur_win and pos.line > 0 then
+            local cur_line = vim.api.nvim_win_get_cursor(cur_win)[1]
+            local src_node = state.tree:get_node(cur_line)
+            if
+              src_node
+              and (src_node.type == "file" or src_node.type == "directory")
+              and normalize_path(src_node:get_id()) ~= normalize_path(state.path)
+            then
+              drag_state.active = true
+              drag_state.dragged = false
+              drag_state.winid = cur_win
+              drag_state.start_line = cur_line
+              drag_state.source_path = src_node:get_id()
+              drag_state.source_name = src_node.name
+            else
+              return
+            end
+          else
+            feed_mouse("<LeftDrag>")
+            return
+          end
         end
 
-        local pos = vim.fn.getmousepos()
         if pos.winid == drag_state.winid and pos.line > 0 then
           pcall(vim.api.nvim_win_set_cursor, pos.winid, { pos.line, 0 })
           if pos.line ~= drag_state.start_line then
@@ -116,12 +139,16 @@ return {
         vim.api.nvim_echo({ { "" } }, false, {})
 
         local pos = vim.fn.getmousepos()
-        if pos.winid ~= winid or pos.line <= 0 then
+        local target_line = pos.line
+        if pos.winid ~= winid then
           vim.notify("ℹ️ Drag dibatalkan (lepas di luar Sidebar Explorer).", vim.log.levels.INFO)
           return
         end
+        if not target_line or target_line <= 0 then
+          target_line = vim.api.nvim_win_get_cursor(winid)[1]
+        end
 
-        local target = state.tree:get_node(pos.line)
+        local target = state.tree:get_node(target_line)
         if not target or (target.type ~= "file" and target.type ~= "directory") then
           return
         end
@@ -254,11 +281,15 @@ return {
             ["<Del>"] = "delete",
             ["d"] = "delete",
             -- Copy / Cut / Paste File & Folder ala VS Code (Duplikat & Pindah)
+            -- Mendukung y/x/p, Alt+C/X/V (anti dibajak Windows Terminal), dan Ctrl+C/X/V
             ["<C-c>"] = "copy_to_clipboard",
+            ["<A-c>"] = "copy_to_clipboard",
             ["y"] = "copy_to_clipboard",
             ["<C-x>"] = "cut_to_clipboard",
+            ["<A-x>"] = "cut_to_clipboard",
             ["x"] = "cut_to_clipboard",
             ["<C-v>"] = "paste_from_clipboard",
+            ["<A-v>"] = "paste_from_clipboard",
             ["p"] = "paste_from_clipboard",
             ["<Esc>"] = "clear_clipboard",
             ["c"] = "copy",
@@ -285,6 +316,30 @@ return {
             ["?"] = "show_help",
             ["<"] = "prev_source",
             [">"] = "next_source",
+          },
+        },
+
+        event_handlers = {
+          {
+            -- Pastikan <LeftDrag> dan <LeftRelease> juga aktif di Visual mode Neo-tree
+            event = "neo_tree_buffer_enter",
+            handler = function()
+              local buf = vim.api.nvim_get_current_buf()
+              local manager = require("neo-tree.sources.manager")
+              vim.keymap.set("v", "<LeftDrag>", function()
+                local state = manager.get_state("filesystem")
+                if state then
+                  handle_drag_mouse_move(state)
+                end
+              end, { buffer = buf, silent = true })
+              vim.keymap.set("v", "<LeftRelease>", function()
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+                local state = manager.get_state("filesystem")
+                if state then
+                  handle_drag_mouse_release(state)
+                end
+              end, { buffer = buf, silent = true })
+            end,
           },
         },
 

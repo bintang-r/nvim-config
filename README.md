@@ -114,9 +114,9 @@ C:\_neovim\nvim.cmd .
 | Aksi / Shortcut *(di Sidebar)* | Fungsi |
 | :--- | :--- |
 | **🖱️ Drag & Drop Mouse** | **Tarik & Lepas File/Folder** ke folder tujuan untuk memindahkan file langsung *(tersedia notifikasi live saat menyeret)* |
-| **`Ctrl + C`** / **`y`** | **Copy File/Folder** ke clipboard Explorer *(siap diduplikat)* |
-| **`Ctrl + X`** / **`x`** | **Cut File/Folder** ke clipboard Explorer *(siap dipindahkan)* |
-| **`Ctrl + V`** / **`p`** | **Paste ke Folder Tujuan** — otomatis **duplikat** jika dari Copy, atau **pindah** jika dari Cut |
+| **`y`** / **`Alt + C`** / **`Ctrl + C`** | **Copy File/Folder** ke clipboard Explorer *(siap diduplikat; gunakan `y` atau `Alt + C` jika `Ctrl + C` dipakai Windows Terminal)* |
+| **`x`** / **`Alt + X`** / **`Ctrl + X`** | **Cut File/Folder** ke clipboard Explorer *(siap dipindahkan)* |
+| **`p`** / **`Alt + V`** / **`Ctrl + V`** | **Paste ke Folder Tujuan** — otomatis **duplikat** jika dari Copy, atau **pindah** jika dari Cut |
 | **`c`** / **`m`** | **Copy / Move Cepat** dengan input path tujuan |
 | **`Y`** | **Salin Path Lengkap** file/folder ke Clipboard Windows |
 | **`Esc`** | **Batalkan** antrean Copy / Cut di Sidebar |
@@ -264,9 +264,9 @@ C:\_neovim\nvim.cmd .
 | Action / Shortcut *(in Sidebar)* | Description |
 | :--- | :--- |
 | **🖱️ Mouse Drag & Drop** | **Drag & Drop File/Folder** onto a target folder to move it directly *(with live drag preview)* |
-| **`Ctrl + C`** / **`y`** | **Copy File/Folder** to Explorer clipboard *(ready to duplicate)* |
-| **`Ctrl + X`** / **`x`** | **Cut File/Folder** to Explorer clipboard *(ready to move)* |
-| **`Ctrl + V`** / **`p`** | **Paste into Target Folder** — automatically **duplicates** on Copy or **moves** on Cut |
+| **`y`** / **`Alt + C`** / **`Ctrl + C`** | **Copy File/Folder** to Explorer clipboard *(ready to duplicate; use `y` or `Alt + C` if Windows Terminal intercepts `Ctrl + C`)* |
+| **`x`** / **`Alt + X`** / **`Ctrl + X`** | **Cut File/Folder** to Explorer clipboard *(ready to move)* |
+| **`p`** / **`Alt + V`** / **`Ctrl + V`** | **Paste into Target Folder** — automatically **duplicates** on Copy or **moves** on Cut |
 | **`c`** / **`m`** | **Quick Copy / Move** with destination path prompt |
 | **`Y`** | **Copy Full Path** of file/folder to Windows Clipboard |
 | **`Esc`** | **Clear** Explorer Copy / Cut clipboard |
